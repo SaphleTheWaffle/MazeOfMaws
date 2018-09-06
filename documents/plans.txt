@@ -1,0 +1,50 @@
+Monsters:
+Slimes (Anthropomorphic + non-anthropomorphic)
+Kobolds
+DRAGONS
+Minotaur
+Naga
+
+
+Traps/puzzles/rooms:
+
+
+
+
+
+Character classes:
+Warrior
+	Higher base damage
+	More hardy
+	More susceptible to magic?
+Rogue
+	Keener eyes, spots hidden traps and items more easily
+	Stealth?
+Wizard
+	Starts with a single spell
+	Magic resistance?
+	Physically weak
+
+
+Items
+	Weapons
+		Stats for different weapons? Non-minimalistic combat?
+		Probably blunt/piercing/slashing at least
+	Magic scrolls/wands
+		Spells?
+	Potions
+		Healing, and other effects both positive and negative
+
+
+Commands
+	North, West, East, South, Up, Down, In, Out, the usual movement commands
+	Attack
+	Get
+	Equip
+	Map
+	Inventory
+	Examine
+	Talk
+	Drink
+	Eat
+	
