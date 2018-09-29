@@ -17,3 +17,7 @@ gradle-app.setting
 .gradletasknamecache
 
 .idea
+
+src/main/resources/token.txt
+
+out/
