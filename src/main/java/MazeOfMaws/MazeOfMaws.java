@@ -1,5 +1,7 @@
 package MazeOfMaws;
 
+import Game.Game;
+import Game.Player;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -10,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class MazeOfMaws extends ListenerAdapter {
+    private static Game game;
 
     public static void main(String[] args) throws LoginException {
         JDABuilder builder = new JDABuilder(AccountType.BOT);
@@ -19,8 +22,9 @@ public class MazeOfMaws extends ListenerAdapter {
             System.out.println("MazeOfMaws/src/main/resources/token.txt");
             return;
         }
+        game = new Game();
         builder.setToken(getToken());
-        builder.addEventListener(new MessageListener("!"));
+        builder.addEventListener(new MessageListener("!", game));
         builder.buildAsync();
     }
 
