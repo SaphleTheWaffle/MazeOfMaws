@@ -1,6 +1,10 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '2.0.1'
 }
+
+mainClassName = "MazeOfMaws.MazeOfMaws"
 
 group 'com.saphlethewaffle'
 version '1.0-SNAPSHOT'
@@ -9,7 +13,7 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    jcenter();
+    jcenter()
 }
 
 dependencies {
