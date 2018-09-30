@@ -12,8 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class MazeOfMaws extends ListenerAdapter {
-    public static final String PROD_TOKEN_PATH = "../resources/main/token.txt";
-    public static final String TEST_TOKEN_PATH = "src/main/resources/token.txt";
+    private static final String PROD_TOKEN_PATH = "../resources/main/token.txt";
+    private static final String TEST_TOKEN_PATH = "src/main/resources/token.txt";
     private static Game game;
 
     public static void main(String[] args) throws LoginException {
@@ -22,7 +22,6 @@ public class MazeOfMaws extends ListenerAdapter {
         if (token.length() < 1) {
             System.out.println("No login token found! Please store it at the following path:");
             System.out.println("MazeOfMaws/src/main/resources/token.txt");
-            System.out.println("Current directory: " + System.getProperty("user.dir"));
             return;
         }
         game = new Game();
