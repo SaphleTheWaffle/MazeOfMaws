@@ -3,7 +3,6 @@ package MazeOfMaws;
 import Game.Game;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import javax.security.auth.login.LoginException;
 import java.io.File;
@@ -11,7 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class MazeOfMaws extends ListenerAdapter {
+public class MazeOfMaws {
     private static final String PROD_TOKEN_PATH = "../resources/main/token.txt";
     private static final String TEST_TOKEN_PATH = "src/main/resources/token.txt";
     private static Game game;

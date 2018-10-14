@@ -6,11 +6,15 @@ public class Player {
     private String id;
     private String name;
     private GameState state;
+    private Maze maze;
+    private Character character;
 
     public Player(User user) {
         this.id = user.getId();
         this.name = user.getName();
         this.state = GameState.NOT_STARTED;
+        this.maze = new Maze();
+        this.character = new Character();
     }
 
     public GameState getState() {
@@ -33,7 +37,7 @@ public class Player {
         return false;
     }
 
-    public String getId() {
+    String getId() {
         return id;
     }
 
