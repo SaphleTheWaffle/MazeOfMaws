@@ -24,6 +24,7 @@ public class Player {
     public boolean startGame() {
         if (state == GameState.NOT_STARTED) {
             state = GameState.STARTED;
+            maze.generateMaze();
             return true;
         }
         return false;
@@ -32,6 +33,7 @@ public class Player {
     public boolean endGame() {
         if (state != GameState.NOT_STARTED) {
             state = GameState.NOT_STARTED;
+            maze = new Maze();
             return true;
         }
         return false;
