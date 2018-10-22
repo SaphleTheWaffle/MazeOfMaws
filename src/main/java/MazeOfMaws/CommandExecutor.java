@@ -1,53 +1,33 @@
 package MazeOfMaws;
 
-import Game.Game;
-import net.dv8tion.jda.core.entities.MessageChannel;
+import Game.Player;
+import MazeOfMaws.Commands.Command;
+import MazeOfMaws.Commands.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
+import java.util.HashMap;
+
 class CommandExecutor {
-    private Game game;
 
-    CommandExecutor(Game game) {
-        this.game = game;
+    private HashMap<String, Command> commandMap;
+
+    CommandExecutor() {
+        initCommands();
     }
 
-    void startGame(MessageReceivedEvent event) {
-        MessageChannel channel = event.getChannel();
-        if (game.getPlayer(event.getAuthor().getId()).startGame()) {
-            channel.sendMessage("Game started. Good luck!").queue();
-        } else {
-            channel.sendMessage("You already have a game running.").queue();
-        }
+    private void initCommands() {
+        commandMap = new HashMap<>();
+        commandMap.put("welcome", new Welcome());
+        commandMap.put("status", new SendStatus());
+        commandMap.put("start", new StartGame());
+        commandMap.put("end", new EndGame());
     }
 
-    void endGame(MessageReceivedEvent event) {
-        MessageChannel channel = event.getChannel();
-        if (game.getPlayer(event.getAuthor().getId()).endGame()) {
-            channel.sendMessage("Game ended.").queue();
-        } else {
-            channel.sendMessage("You don't currently have an active game running.").queue();
-        }
+    String sendWelcomeMessage(MessageReceivedEvent event) {
+        return executeCommand(null, "welcome", event.getAuthor().getName());
     }
 
-    void sendStatus(MessageReceivedEvent event) {
-        MessageChannel channel = event.getChannel();
-        switch (game.getPlayer(event.getAuthor().getId()).getState()) {
-            case NOT_STARTED:
-                channel.sendMessage("You do not currently have a game running.").queue();
-                break;
-            case STARTED:
-                channel.sendMessage("You are currently in game.").queue();
-                break;
-            case IN_COMBAT:
-                channel.sendMessage("You are currently in combat.").queue();
-                break;
-            default:
-                channel.sendMessage("You are somehow in a game state that doesn't exist.").queue();
-        }
-    }
-
-    void sendWelcomeMessage(MessageReceivedEvent event) {
-        event.getChannel().sendMessage("Hi, " + event.getAuthor().getName() + "!").queue();
-        event.getChannel().sendMessage("Welcome to the Maze of Maws! Currently a work in progress.").queue();
+    String executeCommand(Player player, String command, String args) {
+        return commandMap.get(command).run(player, args);
     }
 }

@@ -27,16 +27,23 @@ public class MessageListener extends ListenerAdapter {
         System.out.println("Message received from " + event.getAuthor().getName());
 
         if (game.addPlayer(new Player(event.getAuthor()))) {
-            executor.sendWelcomeMessage(event);
+            event.getChannel().sendMessage(executor.sendWelcomeMessage(event)).queue();
             return;
         }
 
+        String command = contents.substring(prefix.length()).split(" ")[0];
+        String args = contents.substring(prefix.length() + command.length());
+
+        String res = executor.executeCommand(game.getPlayer(event.getAuthor().getId()), command, args);
+
+        event.getChannel().sendMessage(res).queue();
+        /*
         if (contents.equals(prefix + "status")) {
             executor.sendStatus(event);
         } else if (contents.equals(prefix + "start")) {
             executor.startGame(event);
         } else if (contents.equals(prefix + "end")) {
             executor.endGame(event);
-        }
+        } */
     }
 }
