@@ -14,7 +14,7 @@ public class MessageListener extends ListenerAdapter {
     MessageListener(String prefix, Game game) {
         this.prefix = prefix;
         this.game = game;
-        this.executor = new CommandExecutor(game);
+        this.executor = new CommandExecutor();
     }
 
     @Override
@@ -37,13 +37,5 @@ public class MessageListener extends ListenerAdapter {
         String res = executor.executeCommand(game.getPlayer(event.getAuthor().getId()), command, args);
 
         event.getChannel().sendMessage(res).queue();
-        /*
-        if (contents.equals(prefix + "status")) {
-            executor.sendStatus(event);
-        } else if (contents.equals(prefix + "start")) {
-            executor.startGame(event);
-        } else if (contents.equals(prefix + "end")) {
-            executor.endGame(event);
-        } */
     }
 }
