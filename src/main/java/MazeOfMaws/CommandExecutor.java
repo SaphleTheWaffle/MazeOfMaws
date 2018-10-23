@@ -33,10 +33,7 @@ class CommandExecutor {
     }
 
     String executeCommand(Player player, String command, String args) {
-        if (player == null) {
-            return "This error should never occur. Something has gone very, very wrong.";
-        }
-        if (player.getState() == GameState.NOT_STARTED) {
+        if (player == null || player.getState() == GameState.NOT_STARTED) {
             return menuMap.get(command).run(player, args);
         }
         return gameMap.get(command).run(player, args);
