@@ -25,6 +25,23 @@ public class Room implements Describable {
         System.arraycopy(exits, 0, this.exits, 0, exits.length);
     }
 
+    public String getExits() {
+        List<String> dirs = new ArrayList<>();
+        if (exits[0] != null) {
+            dirs.add("north");
+        }
+        if (exits[1] != null) {
+            dirs.add("west");
+        }
+        if (exits[2] != null) {
+            dirs.add("east");
+        }
+        if (exits[3] != null) {
+            dirs.add("south");
+        }
+        return String.join(", ", dirs);
+    }
+
     public Room getExit(int direction) {
         return exits[direction];
     }

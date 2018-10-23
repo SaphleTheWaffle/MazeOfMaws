@@ -1,10 +1,12 @@
 package MazeOfMaws.Commands;
 
+import Game.Entities.Room;
 import Game.Player;
 
 public class Look implements Command {
     @Override
     public String run(Player player, String args) {
-        return player.getCharacter().getLocation().describe();
+        Room location = player.getCharacter().getLocation();
+        return location.describe() + "\nExits: " + location.getExits();
     }
 }

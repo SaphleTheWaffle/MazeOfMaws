@@ -20,11 +20,11 @@ public class Go implements Command {
                 direction = 3;
                 break;
             default:
-                direction = 0;
+                direction = -1;
         }
         if (player.move(direction)) {
             return "You move through the " + args.toLowerCase() + "ern exit.\n" + new Look().run(player, null);
         }
-        return "There is no exit in that direction: \'" + args.toLowerCase() + "\'";
+        return "There is no exit in that direction: \'" + args.toLowerCase() + "\' (" + direction + ")";
     }
 }
