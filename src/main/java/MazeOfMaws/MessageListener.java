@@ -31,8 +31,9 @@ public class MessageListener extends ListenerAdapter {
             return;
         }
 
-        String command = contents.substring(prefix.length()).split(" ")[0];
-        String args = contents.substring(prefix.length() + command.length());
+        String command = contents.substring(prefix.length()).split(" ")[0].toLowerCase();
+        int commandLength = prefix.length() + command.length() + (contents.length() > command.length() + 1 ? 1 : 0);
+        String args = contents.substring(commandLength);
 
         String res = executor.executeCommand(game.getPlayer(event.getAuthor().getId()), command, args);
 

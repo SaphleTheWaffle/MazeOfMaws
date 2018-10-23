@@ -26,6 +26,7 @@ class CommandExecutor {
         gameMap.put("status", new SendStatus());
         gameMap.put("end", new EndGame());
         gameMap.put("look", new Look());
+        gameMap.put("go", new Go());
     }
 
     String sendWelcomeMessage(MessageReceivedEvent event) {
