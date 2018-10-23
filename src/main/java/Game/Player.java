@@ -21,7 +21,6 @@ public class Player {
         this.name = user.getName();
         this.state = GameState.NOT_STARTED;
         this.maze = new Maze();
-        this.character = new Character("Test character", 100, 1);
     }
 
     public GameState getState() {
@@ -32,6 +31,8 @@ public class Player {
         if (state == GameState.NOT_STARTED) {
             state = GameState.STARTED;
             maze.generateMaze();
+            character = new Character("Test character", 100, 1);
+            character.move(maze.getEntrance());
             return true;
         }
         return false;

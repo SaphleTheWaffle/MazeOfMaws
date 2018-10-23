@@ -4,6 +4,7 @@ import Game.Entities.Room;
 
 public class Maze {
     private Room[][] grid;
+    Room entrance;
 
     void generateMaze() {
         grid = new Room[5][5];
@@ -25,6 +26,12 @@ public class Maze {
                 grid[i][j].setExits(exits);
             }
         }
+
+        entrance = grid[0][0];
+    }
+
+    public Room getEntrance() {
+        return entrance;
     }
 
     public Room getRoom(int x, int y) {
