@@ -17,10 +17,10 @@ public class Maze {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 Room[] exits = new Room[5];
-                exits[0] = i == 0 ? null : grid[i-1][j];
-                exits[1] = j == 0 ? null : grid[i][j-1];
-                exits[2] = j >= grid.length - 1 ? null : grid[i][j+1];
-                exits[3] = i >= grid[0].length - 1 ? null : grid[i+1][j];
+                exits[0] = getRoom(i-1, j);
+                exits[1] = getRoom(i, j-1);
+                exits[2] = getRoom(i, j+1);
+                exits[3] = getRoom(i+1, j);
                 exits[4] = null;
                 grid[i][j].setExits(exits);
             }
@@ -28,6 +28,9 @@ public class Maze {
     }
 
     public Room getRoom(int x, int y) {
+        if (x < 0 || y < 0 || x >= grid.length || y >= grid[0].length) {
+            return null;
+        }
         return grid[y][x];
     }
 }
