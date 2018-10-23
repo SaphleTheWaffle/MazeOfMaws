@@ -12,11 +12,17 @@ public class Room implements Describable {
     List<Item> items;
     List<Creature> creatures;
     List<Obstacle> obstacles;
+    Room[] exits;
 
     public Room() {
         items = new ArrayList<>();
         creatures = new ArrayList<>();
         obstacles = new ArrayList<>();
+        exits = new Room[5];
+    }
+
+    public void setExits(Room[] exits) {
+        System.arraycopy(exits, 0, this.exits, 0, exits.length);
     }
 
     @Override
