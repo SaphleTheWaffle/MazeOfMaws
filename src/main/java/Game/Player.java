@@ -1,6 +1,7 @@
 package Game;
 
 import Game.Entities.Creatures.Character;
+import Game.Entities.Room;
 import net.dv8tion.jda.core.entities.User;
 
 public class Player {
@@ -35,6 +36,15 @@ public class Player {
         if (state != GameState.NOT_STARTED) {
             state = GameState.NOT_STARTED;
             maze = new Maze();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean move(int direction) {
+        Room newRoom = character.getLocation().getExit(direction);
+        if (newRoom != null) {
+            character.move(newRoom);
             return true;
         }
         return false;

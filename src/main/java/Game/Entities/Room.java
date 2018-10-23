@@ -25,6 +25,10 @@ public class Room implements Describable {
         System.arraycopy(exits, 0, this.exits, 0, exits.length);
     }
 
+    public Room getExit(int direction) {
+        return exits[direction];
+    }
+
     @Override
     public String describe() {
         StringBuilder desc = new StringBuilder();
