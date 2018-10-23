@@ -9,6 +9,11 @@ public class Player {
     private String name;
     private GameState state;
     private Maze maze;
+
+    public Character getCharacter() {
+        return character;
+    }
+
     private Character character;
 
     public Player(User user) {
