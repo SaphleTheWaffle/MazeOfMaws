@@ -18,6 +18,7 @@ class CommandExecutor {
 
     private void initCommands() {
         menuMap = new HashMap<>();
+        gameMap = new HashMap<>();
         menuMap.put("welcome", new Welcome());
         menuMap.put("start", new StartGame());
         menuMap.put("status", new SendStatus());
