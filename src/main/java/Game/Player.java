@@ -1,5 +1,6 @@
 package Game;
 
+import Game.Entities.Creatures.Character;
 import net.dv8tion.jda.core.entities.User;
 
 public class Player {
@@ -14,7 +15,7 @@ public class Player {
         this.name = user.getName();
         this.state = GameState.NOT_STARTED;
         this.maze = new Maze();
-        this.character = new Character();
+        this.character = new Character("Test character", 100, 1);
     }
 
     public GameState getState() {

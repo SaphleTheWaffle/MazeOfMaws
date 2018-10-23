@@ -1,11 +1,13 @@
 package Game.Entities.Creatures;
 
+import Game.Entities.Coordinates;
 import Game.Entities.Describable;
 
 public abstract class Creature implements Describable {
     private int maxHealth;
     private int currentHealth;
     private int damage;
+    protected Coordinates coords;
     private String name;
 
     public Creature(String name, int maxHealth, int damage) {
