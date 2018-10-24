@@ -4,7 +4,7 @@ import Game.Entities.Room;
 
 public class Maze {
     private Room[][] grid;
-    Room entrance;
+    private Room entrance;
 
     void generateMaze() {
         grid = new Room[5][5];
