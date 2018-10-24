@@ -1,5 +1,6 @@
 package Game.Entities;
 
+import Game.Direction;
 import Game.Entities.Creatures.Creature;
 import Game.Entities.Items.Item;
 import Game.Entities.Obstacles.Obstacle;
@@ -9,10 +10,10 @@ import java.util.List;
 
 public class Room implements Describable {
 
-    List<Item> items;
-    List<Creature> creatures;
-    List<Obstacle> obstacles;
-    Room[] exits;
+    private List<Item> items;
+    private List<Creature> creatures;
+    private List<Obstacle> obstacles;
+    private Room[] exits;
 
     public Room() {
         items = new ArrayList<>();
@@ -27,17 +28,10 @@ public class Room implements Describable {
 
     public String getExits() {
         List<String> dirs = new ArrayList<>();
-        if (exits[0] != null) {
-            dirs.add("north");
-        }
-        if (exits[1] != null) {
-            dirs.add("west");
-        }
-        if (exits[2] != null) {
-            dirs.add("east");
-        }
-        if (exits[3] != null) {
-            dirs.add("south");
+        for (int i = 0; i < exits.length; i++) {
+            if (exits[i] != null) {
+                dirs.add(Direction.valueOf(i).name);
+            }
         }
         return String.join(", ", dirs);
     }
@@ -46,10 +40,36 @@ public class Room implements Describable {
         return exits[direction];
     }
 
+    public void addItem(Item item) {
+        items.add(item);
+    }
+
+    public void addCreature(Creature creature) {
+        creatures.add(creature);
+    }
+
+    public void addObstacle(Obstacle obstacle) {
+        obstacles.add(obstacle);
+    }
+
+    public String describeItem(String itemName) {
+        for (Item i : items) {
+            if (i.getName().equals(itemName)) {
+                return i.describe();
+            }
+        }
+        return "";
+    }
+
     @Override
     public String describe() {
         StringBuilder desc = new StringBuilder();
         desc.append("A plain stone room with no distinguishing features. (WIP)\n");
         return desc.toString();
+    }
+
+    @Override
+    public String getName() {
+        return "a room";
     }
 }

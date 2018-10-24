@@ -9,12 +9,11 @@ public class Player {
     private String name;
     private GameState state;
     private Maze maze;
+    private Character character;
 
     public Character getCharacter() {
         return character;
     }
-
-    private Character character;
 
     public Player(User user) {
         this.id = user.getId();
@@ -54,6 +53,14 @@ public class Player {
             return true;
         }
         return false;
+    }
+
+    public String describeItem(String itemName) {
+        String res = character.describeItem(itemName);
+        if (res.equals("")) {
+            res = character.getLocation().describeItem(itemName);
+        }
+        return res;
     }
 
     String getId() {

@@ -1,6 +1,5 @@
 package MazeOfMaws;
 
-import Game.Game;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDABuilder;
 
@@ -13,7 +12,6 @@ import java.nio.file.Paths;
 public class MazeOfMaws {
     private static final String PROD_TOKEN_PATH = "../resources/main/token.txt";
     private static final String TEST_TOKEN_PATH = "src/main/resources/token.txt";
-    private static Game game;
 
     public static void main(String[] args) throws LoginException {
         JDABuilder builder = new JDABuilder(AccountType.BOT);
@@ -23,9 +21,8 @@ public class MazeOfMaws {
             System.out.println("MazeOfMaws/src/main/resources/token.txt");
             return;
         }
-        game = new Game();
         builder.setToken(getToken());
-        builder.addEventListener(new MessageListener("!", game));
+        builder.addEventListener(new MessageListener("!"));
         builder.buildAsync();
     }
 

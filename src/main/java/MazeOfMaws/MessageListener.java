@@ -11,9 +11,9 @@ public class MessageListener extends ListenerAdapter {
     private Game game;
     private CommandExecutor executor;
 
-    MessageListener(String prefix, Game game) {
+    MessageListener(String prefix) {
         this.prefix = prefix;
-        this.game = game;
+        this.game = new Game();
         this.executor = new CommandExecutor();
     }
 

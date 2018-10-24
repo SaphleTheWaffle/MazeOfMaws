@@ -2,7 +2,7 @@ package Game;
 
 import Game.Entities.Room;
 
-public class Maze {
+class Maze {
     private Room[][] grid;
     private Room entrance;
 
@@ -30,11 +30,11 @@ public class Maze {
         entrance = grid[0][0];
     }
 
-    public Room getEntrance() {
+    Room getEntrance() {
         return entrance;
     }
 
-    public Room getRoom(int x, int y) {
+    Room getRoom(int x, int y) {
         if (x < 0 || y < 0 || x >= grid.length || y >= grid[0].length) {
             return null;
         }
