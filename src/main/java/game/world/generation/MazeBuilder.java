@@ -28,7 +28,7 @@ public class MazeBuilder {
         if (rac == null) {
             return;
         }
-        for (int i = 0; i < Direction.values().length - 1; i++) {
+        for (int i = 0; i < Direction.values().length; i++) {
             Coordinates neighbour = rac.getNeighbour(Direction.valueOf(i));
             if (random.nextInt(100) > 50 && neighbour.isValid()) {
                 if (map.getRoomAt(neighbour) == null) {

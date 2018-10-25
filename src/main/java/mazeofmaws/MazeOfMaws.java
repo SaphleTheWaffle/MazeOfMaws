@@ -22,7 +22,7 @@ public class MazeOfMaws {
             return;
         }
         builder.setToken(getToken());
-        builder.addEventListener(new MessageListener("!"));
+        builder.addEventListener(new MessageListener(""));
         builder.buildAsync();
     }
 
