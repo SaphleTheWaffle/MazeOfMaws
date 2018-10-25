@@ -1,4 +1,4 @@
-package Game;
+package Game.World;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,8 +27,7 @@ public enum Direction {
         public Direction getOpposite() {
             return NORTH;
         }
-    },
-    DOWN(4, "down");
+    };
 
     public int index;
     public String name;
@@ -51,6 +50,6 @@ public enum Direction {
     }
 
     public Direction getOpposite() {
-        return DOWN;
+        return NORTH;
     }
 }

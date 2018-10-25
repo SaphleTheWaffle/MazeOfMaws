@@ -1,9 +1,9 @@
 package Game.Entities;
 
-import Game.Direction;
 import Game.Entities.Creatures.Creature;
 import Game.Entities.Items.Item;
 import Game.Entities.Obstacles.Obstacle;
+import Game.World.Direction;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,6 +2,7 @@ package Game;
 
 import Game.Entities.Creatures.Character;
 import Game.Entities.Room;
+import Game.World.Maze;
 import net.dv8tion.jda.core.entities.User;
 
 public class Player {
