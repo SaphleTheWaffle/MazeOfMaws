@@ -40,6 +40,10 @@ public class Room implements Describable {
         return exits[direction];
     }
 
+    public void setExit(Room room, Direction dir) {
+        exits[dir.index] = room;
+    }
+
     public void addItem(Item item) {
         items.add(item);
     }

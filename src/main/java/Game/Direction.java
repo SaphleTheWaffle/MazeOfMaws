@@ -4,10 +4,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Direction {
-    NORTH(0, "north"),
-    WEST(1, "west"),
-    EAST(2, "east"),
-    SOUTH(3, "south"),
+    NORTH(0, "north") {
+        @Override
+        public Direction getOpposite() {
+            return SOUTH;
+        }
+    },
+    WEST(1, "west") {
+        @Override
+        public Direction getOpposite() {
+            return EAST;
+        }
+    },
+    EAST(2, "east") {
+        @Override
+        public Direction getOpposite() {
+            return WEST;
+        }
+    },
+    SOUTH(3, "south") {
+        @Override
+        public Direction getOpposite() {
+            return NORTH;
+        }
+    },
     DOWN(4, "down");
 
     public int index;
@@ -28,5 +48,9 @@ public enum Direction {
 
     public static Direction valueOf(int index) {
         return map.get(index);
+    }
+
+    public Direction getOpposite() {
+        return DOWN;
     }
 }

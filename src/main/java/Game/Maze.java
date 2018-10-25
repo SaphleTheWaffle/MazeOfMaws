@@ -5,29 +5,14 @@ import Game.Entities.Room;
 class Maze {
     private Room[][] grid;
     private Room entrance;
+    private MazeBuilder mb;
+
+    Maze() {
+        mb = new MazeBuilder();
+    }
 
     void generateMaze() {
-        grid = new Room[5][5];
-
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                grid[i][j] = new Room();
-            }
-        }
-
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                Room[] exits = new Room[5];
-                exits[0] = getRoom(i-1, j);
-                exits[1] = getRoom(i, j-1);
-                exits[2] = getRoom(i, j+1);
-                exits[3] = getRoom(i+1, j);
-                exits[4] = null;
-                grid[i][j].setExits(exits);
-            }
-        }
-
-        entrance = grid[0][0];
+        entrance = mb.build(5, 5);
     }
 
     Room getEntrance() {
