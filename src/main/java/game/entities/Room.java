@@ -36,8 +36,8 @@ public class Room implements Describable {
         return String.join(", ", dirs);
     }
 
-    public Room getExit(int direction) {
-        return exits[direction];
+    public Room getExit(Direction direction) {
+        return exits[direction.index];
     }
 
     public void setExit(Room room, Direction dir) {

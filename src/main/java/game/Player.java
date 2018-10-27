@@ -2,6 +2,7 @@ package game;
 
 import game.entities.Room;
 import game.entities.creatures.Character;
+import game.world.Direction;
 import game.world.Maze;
 import net.dv8tion.jda.core.entities.User;
 
@@ -47,7 +48,7 @@ public class Player {
         return false;
     }
 
-    public boolean move(int direction) {
+    public boolean move(Direction direction) {
         Room newRoom = character.getLocation().getExit(direction);
         if (newRoom != null) {
             character.move(newRoom);

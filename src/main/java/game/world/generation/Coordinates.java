@@ -39,7 +39,7 @@ public class Coordinates {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Coordinates) {
+        if (o.getClass() == this.getClass()) {
             Coordinates c = (Coordinates) o;
             return this.x == c.getX() && this.y == c.getY();
         }
