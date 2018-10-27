@@ -7,6 +7,7 @@ import game.world.Direction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Room implements Describable {
 
@@ -14,12 +15,14 @@ public class Room implements Describable {
     private List<Creature> creatures;
     private List<Obstacle> obstacles;
     private Room[] exits;
+    private String id;
 
     public Room() {
         items = new ArrayList<>();
         creatures = new ArrayList<>();
         obstacles = new ArrayList<>();
         exits = new Room[5];
+        id = UUID.randomUUID().toString();
     }
 
     public void setExits(Room[] exits) {
@@ -63,6 +66,14 @@ public class Room implements Describable {
             }
         }
         return "";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this.getClass() == o.getClass()) {
+            return ((Room) o).id.equals(this.id);
+        }
+        return false;
     }
 
     @Override
