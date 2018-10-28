@@ -21,7 +21,7 @@ public class MazeOfMaws {
             System.out.println("MazeOfMaws/src/main/resources/token.txt");
             return;
         }
-        builder.setToken(getToken());
+        builder.setToken(token);
         builder.addEventListener(new MessageListener(""));
         builder.buildAsync();
     }
