@@ -13,7 +13,7 @@ public class RoomMapTest {
         RoomMap rm = new RoomMap();
         Room room = new Room();
 
-        rm.setRoomAt(room, coords);
+        rm.setRoomAt(room, coords, false);
         RoomAndCoordinates rac = rm.getRoomAt(coords);
         assertEquals(room, rac.getRoom());
         assertEquals(coords, rac.getCoords());
@@ -25,7 +25,7 @@ public class RoomMapTest {
         RoomMap rm = new RoomMap();
 
         for (int i = 0; i < rooms; i++) {
-            rm.setRoomAt(new Room(), new Coordinates(i, 0));
+            rm.setRoomAt(new Room(), new Coordinates(i, 0), false);
         }
 
         assertEquals(rooms, rm.size());
@@ -38,8 +38,9 @@ public class RoomMapTest {
         Room room2 = new Room();
         Coordinates coords = new Coordinates(4, 5);
 
-        rm.setRoomAt(room1, coords);
-        rm.setRoomAt(room2, coords);
+        rm.setRoomAt(room1, coords, false);
+        rm.setRoomAt(room2, coords, false);
+
         assertEquals(1, rm.size());
         assertEquals(room2, rm.getRoomAt(coords).getRoom());
     }

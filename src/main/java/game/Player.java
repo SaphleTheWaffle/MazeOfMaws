@@ -4,6 +4,7 @@ import game.entities.Room;
 import game.entities.creatures.Character;
 import game.world.Direction;
 import game.world.Maze;
+import game.world.generation.RoomMap;
 import net.dv8tion.jda.core.entities.User;
 
 public class Player {
@@ -71,6 +72,10 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public RoomMap getMap() {
+        return maze.getMap();
     }
 
     @Override

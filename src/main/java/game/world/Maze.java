@@ -2,6 +2,7 @@ package game.world;
 
 import game.entities.Room;
 import game.world.generation.MazeBuilder;
+import game.world.generation.RoomMap;
 
 public class Maze {
     private Room entrance;
@@ -17,5 +18,9 @@ public class Maze {
 
     public Room getEntrance() {
         return entrance;
+    }
+
+    public RoomMap getMap() {
+        return mb.getMap();
     }
 }

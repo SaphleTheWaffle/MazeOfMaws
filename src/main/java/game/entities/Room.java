@@ -16,6 +16,8 @@ public class Room implements Describable {
     private List<Obstacle> obstacles;
     private Room[] exits;
     private String id;
+    private final static char[] symbols = {'□', 'o', 'o', '╔', 'o', '╗', '═', '╦', 'o', '║', '╚', '╠', '╝', '╣', '╩', '╬'};
+
 
     public Room() {
         items = new ArrayList<>();
@@ -66,6 +68,28 @@ public class Room implements Describable {
             }
         }
         return "";
+    }
+
+    public int numberOfExits() {
+        int num = 0;
+        for (Room r : exits) {
+            if (r != null) {
+                num++;
+            }
+        }
+        return num;
+    }
+
+    public char getSymbol() {
+        int north = bitwiseIsExit(Direction.NORTH.index) << 3;
+        int west = bitwiseIsExit(Direction.WEST.index) << 2;
+        int east = bitwiseIsExit(Direction.EAST.index) << 1;
+        int south = bitwiseIsExit(Direction.SOUTH.index);
+        return symbols[north | west | east | south];
+    }
+
+    private int bitwiseIsExit(int index) {
+        return (exits[index] != null) ? 1 : 0;
     }
 
     @Override

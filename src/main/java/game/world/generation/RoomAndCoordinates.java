@@ -3,16 +3,18 @@ package game.world.generation;
 import game.entities.Room;
 import game.world.Direction;
 
-class RoomAndCoordinates {
+public class RoomAndCoordinates {
     private Coordinates coords;
     private Room room;
+    private boolean corridor;
 
-    RoomAndCoordinates(Coordinates coords, Room room) {
+    RoomAndCoordinates(Coordinates coords, Room room, boolean corridor) {
         this.coords = coords;
         this.room = room;
+        this.corridor = corridor;
     }
 
-    Room getRoom() {
+    public Room getRoom() {
         return room;
     }
 
@@ -20,11 +22,15 @@ class RoomAndCoordinates {
         this.room = room;
     }
 
-    Coordinates getCoords() {
+    public Coordinates getCoords() {
         return coords;
     }
 
     Coordinates getNeighbour(Direction dir) {
         return coords.getNeighbour(dir);
+    }
+
+    public boolean isCorridor() {
+        return corridor;
     }
 }
