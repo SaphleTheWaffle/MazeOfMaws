@@ -58,6 +58,10 @@ public class Player {
         return false;
     }
 
+    public String describeRoom() {
+        return character.getLocation().describe();
+    }
+
     public String describeItem(String itemName) {
         String res = character.describeItem(itemName);
         if (res.equals("")) {
@@ -80,10 +84,7 @@ public class Player {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Player) {
-            return ((Player) o).id.equals(this.id);
-        }
+        return o instanceof Player && ((Player) o).id.equals(this.id);
 
-        return false;
     }
 }

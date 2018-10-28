@@ -3,6 +3,7 @@ package game.entities;
 import game.entities.creatures.Creature;
 import game.entities.items.Item;
 import game.entities.obstacles.Obstacle;
+import game.entities.templates.RoomType;
 import game.world.Direction;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class Room implements Describable {
     private List<Creature> creatures;
     private List<Obstacle> obstacles;
     private Room[] exits;
+    private RoomType type;
     private String id;
     private final static char[] symbols = {'□', 'o', 'o', '╔', 'o', '╗', '═', '╦', 'o', '║', '╚', '╠', '╝', '╣', '╩', '╬'};
 
@@ -31,7 +33,7 @@ public class Room implements Describable {
         System.arraycopy(exits, 0, this.exits, 0, exits.length);
     }
 
-    public String getExits() {
+    String getExits() {
         List<String> dirs = new ArrayList<>();
         for (int i = 0; i < exits.length; i++) {
             if (exits[i] != null) {
@@ -92,19 +94,24 @@ public class Room implements Describable {
         return (exits[index] != null) ? 1 : 0;
     }
 
+    public void setType(RoomType type) {
+        this.type = type;
+    }
+
+    public boolean hasType() {
+        return type != null;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this.getClass() == o.getClass()) {
-            return ((Room) o).id.equals(this.id);
-        }
-        return false;
+        return this.getClass() == o.getClass() && ((Room) o).id.equals(this.id);
     }
 
     @Override
     public String describe() {
-        StringBuilder desc = new StringBuilder();
-        desc.append("A plain stone room with no distinguishing features. (WIP)\n");
-        return desc.toString();
+        return type.getDescription() +
+                "\nExits: " +
+                getExits();
     }
 
     @Override

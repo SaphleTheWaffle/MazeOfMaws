@@ -1,0 +1,49 @@
+{
+  "types":
+    [
+      {
+        "id": "entrance",
+        "description": "a small chamber with walls, floor, and ceiling made of stone. In a corner sits a large stone slab, roughly shaped like a bed.",
+        "categories": [
+          "safe"
+        ],
+        "rarity": 0
+      },
+      {
+        "id": "corridor",
+        "description": "a long, narrow stone corridor. Flickering torches line the walls, providing barely enough light to see.",
+        "categories": [
+          "corridor",
+          "dungeon"
+        ],
+        "rarity": 5
+      },
+      {
+        "id": "fountain",
+        "description": "a large stone room. In the centre sits a large elaborately carved fountain.",
+        "categories": [
+          "water",
+          "fountain",
+          "dungeon"
+        ],
+        "rarity": 1
+      },
+      {
+        "id": "forest",
+        "description": "an indoors forest. The floor is covered in soft grass, and deciduous trees that reach the high ceiling are everywhere. Between their leaves and the mist covering the room, much of the area is obscured.",
+        "categories": [
+          "plant"
+        ],
+        "rarity": 1
+      },
+      {
+        "id": "kitchen",
+        "description": "some sort of kitchen. A large oven sits against one wall, and a series of counters with various cooking implements line the room.",
+        "categories": [
+          "dungeon",
+          "cooking"
+        ],
+        "rarity": 1
+      }
+    ]
+}

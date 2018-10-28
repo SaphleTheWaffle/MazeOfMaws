@@ -49,6 +49,21 @@ public enum Direction {
         return map.get(index);
     }
 
+    public static Direction from(String s) {
+        switch (s.toLowerCase()) {
+            case "north":
+                return NORTH;
+            case "west":
+                return WEST;
+            case "east":
+                return EAST;
+            case "south":
+                return SOUTH;
+            default:
+                return null;
+        }
+    }
+
     public Direction getOpposite() {
         return NORTH;
     }

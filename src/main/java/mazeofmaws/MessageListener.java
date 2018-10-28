@@ -36,7 +36,8 @@ public class MessageListener extends ListenerAdapter {
         String args = contents.substring(commandLength);
 
         String res = executor.executeCommand(game.getPlayer(event.getAuthor().getId()), command, args);
-
-        event.getChannel().sendMessage(res).queue();
+        if (res.length() > 0) {
+            event.getChannel().sendMessage(res).queue();
+        }
     }
 }

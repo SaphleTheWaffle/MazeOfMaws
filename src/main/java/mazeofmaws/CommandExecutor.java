@@ -35,9 +35,15 @@ class CommandExecutor {
     }
 
     String executeCommand(Player player, String command, String args) {
+        Command cmd;
         if (player == null || player.getState() == GameState.NOT_STARTED) {
-            return menuMap.get(command).run(player, args);
+            cmd = menuMap.get(command);
+        } else {
+            cmd = gameMap.get(command);
         }
-        return gameMap.get(command).run(player, args);
+        if (cmd != null) {
+            return cmd.run(player, args);
+        }
+        return "";
     }
 }

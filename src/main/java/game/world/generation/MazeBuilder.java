@@ -1,6 +1,7 @@
 package game.world.generation;
 
 import game.entities.Room;
+import game.entities.templates.Templates;
 import game.world.Direction;
 
 import java.util.Random;
@@ -9,6 +10,7 @@ public class MazeBuilder {
 
     private Random random;
     private RoomMap map;
+    private Templates templates;
 
     public RoomMap getMap() {
         return map;
@@ -17,7 +19,9 @@ public class MazeBuilder {
     public Room build() {
         random = new Random();
         map = new RoomMap();
+        templates = new Templates();
         Room entrance = new Room();
+        entrance.setType(templates.getEntrance());
         map.setRoomAt(entrance, 0, 0, false);
 
         while (map.size() < 25) {
@@ -28,6 +32,7 @@ public class MazeBuilder {
                 }
             }
         }
+        setRoomTypes();
         return entrance;
     }
 
@@ -61,5 +66,13 @@ public class MazeBuilder {
 
     private boolean overThreshold(RoomAndCoordinates rac) {
         return rac != null && rac.isCorridor() && rac.getRoom().numberOfExits() > 2;
+    }
+
+    private void setRoomTypes() {
+        for (RoomAndCoordinates rac : map.getRooms()) {
+            if (!rac.getRoom().hasType()) {
+                rac.getRoom().setType(templates.getRoomType());
+            }
+        }
     }
 }
