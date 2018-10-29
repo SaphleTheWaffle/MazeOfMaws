@@ -10,18 +10,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Templates {
     private List<RoomType> roomTypes;
     private Random random;
 
-    public Templates() {
+    private static final Templates INSTANCE = new Templates();
+
+    private Templates() {
         random = new Random();
         try {
             buildRoomTypes();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Templates getInstance() {
+        return INSTANCE;
     }
 
     private void buildRoomTypes() throws IOException {
@@ -66,5 +73,13 @@ public class Templates {
         }
         System.out.println("No entrance found!");
         return null;
+    }
+
+    public RoomType getBossRoom() {
+        List<RoomType> bossRooms = roomTypes.stream()
+                .filter(e -> e.getId().contains("boss"))
+                .collect(Collectors.toList());
+        int index = random.nextInt(bossRooms.size());
+        return bossRooms.get(index);
     }
 }

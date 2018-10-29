@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class MazeBuilder {
 
-    private Random random;
+    private Random random = new Random();
     private RoomMap map;
     private Templates templates;
 
@@ -17,9 +17,8 @@ public class MazeBuilder {
     }
 
     public Room build() {
-        random = new Random();
         map = new RoomMap();
-        templates = new Templates();
+        templates = Templates.getInstance();
         Room entrance = new Room();
         entrance.setType(templates.getEntrance());
         map.setRoomAt(entrance, 0, 0, false);

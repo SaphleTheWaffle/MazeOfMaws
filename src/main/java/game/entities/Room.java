@@ -20,7 +20,7 @@ public class Room {
     private RoomType type;
     private boolean visited;
     private String id;
-    private final static char[] symbols = {'□', 'o', 'o', '╔', 'o', '╗', '═', '╦', 'o', '║', '╚', '╠', '╝', '╣', '╩', '╬'};
+    private final static char[] SYMBOLS = {'□', 'o', 'o', '╔', 'o', '╗', '═', '╦', 'o', '║', '╚', '╠', '╝', '╣', '╩', '╬'};
 
 
     public Room() {
@@ -74,7 +74,7 @@ public class Room {
         int west = bitwiseIsExit(Direction.WEST.index) << 2;
         int east = bitwiseIsExit(Direction.EAST.index) << 1;
         int south = bitwiseIsExit(Direction.SOUTH.index);
-        return symbols[north | west | east | south];
+        return SYMBOLS[north | west | east | south];
     }
 
     private int bitwiseIsExit(int index) {
