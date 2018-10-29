@@ -1,9 +1,8 @@
 package game.entities.creatures;
 
-import game.entities.Describable;
 import game.entities.Room;
 
-public abstract class Creature implements Describable {
+public abstract class Creature {
     private int maxHealth;
     private int currentHealth;
     private int damage;

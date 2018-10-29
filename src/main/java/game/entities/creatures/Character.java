@@ -23,20 +23,10 @@ public class Character extends Creature {
         return location.describe(true);
     }
 
-    @Override
-    public String describe(boolean detailed) {
-        return null;
-    }
-
-    @Override
-    public String getName() {
-        return "player";
-    }
-
     public String describeItem(String itemName) {
         for (Item i : inventory) {
             if (i.getName().equals(itemName)) {
-                return i.describe(true);
+                return i.describe();
             }
         }
         return "";

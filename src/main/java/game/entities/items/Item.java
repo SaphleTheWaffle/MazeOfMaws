@@ -1,11 +1,13 @@
 package game.entities.items;
 
-import game.entities.Describable;
-
-public abstract class Item implements Describable {
+public abstract class Item {
     private boolean pickupable;
 
     public final boolean isPickupable() {
         return pickupable;
     }
+
+    public abstract String getName();
+
+    public abstract String describe();
 }

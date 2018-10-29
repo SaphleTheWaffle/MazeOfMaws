@@ -5,12 +5,13 @@ import game.entities.items.Item;
 import game.entities.obstacles.Obstacle;
 import game.entities.templates.RoomType;
 import game.world.Direction;
+import utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Room implements Describable {
+public class Room {
 
     private List<Item> items;
     private List<Creature> creatures;
@@ -31,15 +32,11 @@ public class Room implements Describable {
         visited = false;
     }
 
-    public void setExits(Room[] exits) {
-        System.arraycopy(exits, 0, this.exits, 0, exits.length);
-    }
-
     String getExits() {
         List<String> dirs = new ArrayList<>();
         for (int i = 0; i < exits.length; i++) {
             if (exits[i] != null) {
-                dirs.add(Direction.valueOf(i).name);
+                dirs.add(StringUtils.italics(Direction.valueOf(i).name));
             }
         }
         return String.join(", ", dirs);
@@ -53,22 +50,10 @@ public class Room implements Describable {
         exits[dir.index] = room;
     }
 
-    public void addItem(Item item) {
-        items.add(item);
-    }
-
-    public void addCreature(Creature creature) {
-        creatures.add(creature);
-    }
-
-    public void addObstacle(Obstacle obstacle) {
-        obstacles.add(obstacle);
-    }
-
     public String describeItem(String itemName) {
         for (Item i : items) {
             if (i.getName().equals(itemName)) {
-                return i.describe(true);
+                return i.describe();
             }
         }
         return "";
@@ -117,15 +102,22 @@ public class Room implements Describable {
         return this.getClass() == o.getClass() && ((Room) o).id.equals(this.id);
     }
 
-    @Override
     public String describe(boolean detailed) {
-        return (detailed ? type.getName() + "\n\n" + type.getDescription() : type.getName()) +
-                "\nExits: " +
-                getExits();
+        return (detailed ? getDetailedDescription() : getShortDescription());
     }
 
-    @Override
-    public String getName() {
-        return type.getName();
+    private String getDetailedDescription() {
+        return StringUtils.bold(type.getName()) + StringUtils.SEPARATOR +
+                type.getDescription() + StringUtils.SEPARATOR +
+                formatExitsString();
+    }
+
+    private String getShortDescription() {
+        return StringUtils.bold(type.getName()) + StringUtils.SEPARATOR +
+                formatExitsString();
+    }
+
+    private String formatExitsString() {
+        return "Exits: " + getExits();
     }
 }

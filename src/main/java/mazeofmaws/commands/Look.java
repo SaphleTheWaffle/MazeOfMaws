@@ -13,8 +13,7 @@ public class Look implements Command {
     }
 
     private String describeRoom(Player player) {
-        Room location = player.getCharacter().getLocation();
-        return "You are in " + location.getName() + "\n\n" + location.describe(true);
+        return "You are in " + player.describeRoom();
     }
 
     private String describeItem(Player player, String args) {
