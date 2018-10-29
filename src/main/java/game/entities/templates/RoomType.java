@@ -4,12 +4,14 @@ import java.util.List;
 
 public class RoomType {
     private String id;
+    private String name;
     private String description;
     private List<String> categories;
     private int rarity;
 
-    RoomType(String id, String description, List<String> categories, int rarity) {
+    RoomType(String id, String name, String description, List<String> categories, int rarity) {
         this.id = id;
+        this.name = name;
         this.description = description;
         this.categories = categories;
         this.rarity = rarity;
@@ -29,5 +31,9 @@ public class RoomType {
 
     int getRarity() {
         return rarity;
+    }
+
+    public String getName() {
+        return name;
     }
 }

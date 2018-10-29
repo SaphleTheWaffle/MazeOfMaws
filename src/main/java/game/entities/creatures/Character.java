@@ -1,6 +1,5 @@
 package game.entities.creatures;
 
-import game.entities.Room;
 import game.entities.items.Item;
 
 import java.util.ArrayList;
@@ -8,20 +7,24 @@ import java.util.List;
 
 public class Character extends Creature {
 
-    List<Item> inventory = new ArrayList<>();
+    private List<Item> inventory = new ArrayList<>();
 
     public Character(String name, int maxHealth, int damage) {
         super(name, maxHealth, damage);
     }
 
-    @Override
-    public void move(Room location) {
-        super.move(location);
+    public String enterRoom() {
+        boolean visited = location.isVisited();
         location.visit();
+        return location.describe(!visited);
+    }
+
+    public String describeRoom() {
+        return location.describe(true);
     }
 
     @Override
-    public String describe() {
+    public String describe(boolean detailed) {
         return null;
     }
 
@@ -33,7 +36,7 @@ public class Character extends Creature {
     public String describeItem(String itemName) {
         for (Item i : inventory) {
             if (i.getName().equals(itemName)) {
-                return i.describe();
+                return i.describe(true);
             }
         }
         return "";

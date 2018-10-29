@@ -3,7 +3,8 @@
     [
       {
         "id": "entrance",
-        "description": "a damp cobble stone room. The large gray bricks are illuminated by the bleak light filtering in through a small, rough-cut skylight in the ceiling. Moss grows in the cracks between the stone, tracing the outlines in green like a maze of vegetation. In the corner of the room you can see a rough looking cot made from stone and lined with moist sticky hay. The smell of mildew fills the room and stuffs your nostrils as you try to breathe through the musty odour.",
+        "name": "a simple stone cell",
+        "description": "Large grey bricks are illuminated by the bleak light filtering in through a small, rough-cut skylight in the ceiling. Moss grows in the cracks between the stone, tracing the outlines in green like a maze of vegetation. In the corner of the room you can see a rough looking cot made from stone and lined with moist sticky hay. The smell of mildew fills the room and stuffs your nostrils as you try to breathe through the musty odour.",
         "categories": [
           "safe"
         ],
@@ -11,13 +12,15 @@
       },
       {
         "id": "boss1",
-        "description": "a huge, cavernous room. Compared to the rest of the maze, this room feels oppressively hot, and the stench of sulfur assaults your senses mercilessly. Jagged stalagmites jut out from the floor along the edges of the room and similarly wicked stalactites hang threateningly from the ceiling, but the room's centre seems to have been cleared out and flattened.",
+        "name": "a cavernous lair",
+        "description": "Compared to the rest of the maze, this room feels oppressively hot, and the stench of sulfur assaults your senses mercilessly. Jagged stalagmites jut out from the floor along the edges of the room and similarly wicked stalactites hang threateningly from the ceiling, but the room's centre seems to have been cleared out and flattened.",
         "categories": ["boss"],
         "rarity": 0
       },
       {
         "id": "corridor",
-        "description": "a long, narrow stone corridor. Flickering torches line the walls, providing barely enough light to see.",
+        "name": "a stone corridor",
+        "description": "Flickering torches line the walls, providing barely enough light to see.",
         "categories": [
           "corridor",
           "dungeon"
@@ -26,7 +29,8 @@
       },
       {
         "id": "fountain",
-        "description": "a large stone room. In the centre sits a large elaborately carved fountain.",
+        "name": "a large fountain",
+        "description": "In the centre of the room sits a large elaborately carved fountain.",
         "categories": [
           "water",
           "fountain",
@@ -36,7 +40,8 @@
       },
       {
         "id": "forest",
-        "description": "an indoors forest. The floor is covered in soft grass, and deciduous trees that reach the high ceiling are everywhere. Between their leaves and the mist covering the room, much of the area is obscured.",
+        "name": "an indoors forest",
+        "description": "The floor is covered in soft grass, and deciduous trees that reach the high ceiling are everywhere. Between their leaves and the mist covering the room, much of the area is obscured.",
         "categories": [
           "plant"
         ],
@@ -44,7 +49,8 @@
       },
       {
         "id": "kitchen",
-        "description": "some sort of kitchen. A large oven sits against one wall, and a series of counters with various cooking implements line the room.",
+        "name": "a kitchen",
+        "description": "A large oven sits against one wall, and a series of counters with various cooking implements line the room.",
         "categories": [
           "dungeon",
           "cooking"

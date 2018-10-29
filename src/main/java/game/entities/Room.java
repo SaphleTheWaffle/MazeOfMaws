@@ -68,7 +68,7 @@ public class Room implements Describable {
     public String describeItem(String itemName) {
         for (Item i : items) {
             if (i.getName().equals(itemName)) {
-                return i.describe();
+                return i.describe(true);
             }
         }
         return "";
@@ -118,14 +118,14 @@ public class Room implements Describable {
     }
 
     @Override
-    public String describe() {
-        return type.getDescription() +
+    public String describe(boolean detailed) {
+        return (detailed ? type.getName() + "\n\n" + type.getDescription() : type.getName()) +
                 "\nExits: " +
                 getExits();
     }
 
     @Override
     public String getName() {
-        return "a room";
+        return type.getName();
     }
 }

@@ -14,7 +14,7 @@ public class Look implements Command {
 
     private String describeRoom(Player player) {
         Room location = player.getCharacter().getLocation();
-        return "You are in " + location.describe();
+        return "You are in " + location.getName() + "\n\n" + location.describe(true);
     }
 
     private String describeItem(Player player, String args) {

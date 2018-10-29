@@ -59,7 +59,11 @@ public class Player {
     }
 
     public String describeRoom() {
-        return character.getLocation().describe();
+        return character.describeRoom();
+    }
+
+    public String enterRoom() {
+        return character.enterRoom();
     }
 
     public String describeItem(String itemName) {

@@ -35,10 +35,11 @@ public class Templates {
         for (int i = 0; i < array.length(); i++) {
             HashMap<String, Object> type = (HashMap<String, Object>) types.get(i);
             String id = (String) type.get("id");
+            String name = (String) type.get("name");
             String description = (String) type.get("description");
             List<String> categories = (List<String>) type.get("categories");
             int rarity = (int) type.get("rarity");
-            roomTypes.add(new RoomType(id, description, categories, rarity));
+            roomTypes.add(new RoomType(id, name, description, categories, rarity));
         }
     }
 
