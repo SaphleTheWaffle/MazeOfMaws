@@ -3,7 +3,7 @@ package game;
 import game.entities.Room;
 import game.entities.creatures.Character;
 import game.world.Direction;
-import game.world.Maze;
+import game.world.generation.MazeBuilder;
 import game.world.generation.RoomMap;
 import net.dv8tion.jda.core.entities.User;
 
@@ -11,7 +11,7 @@ public class Player {
     private String id;
     private String name;
     private GameState state;
-    private Maze maze;
+    private MazeBuilder maze;
     private Character character;
 
     public Character getCharacter() {
@@ -22,7 +22,7 @@ public class Player {
         this.id = user.getId();
         this.name = user.getName();
         this.state = GameState.NOT_STARTED;
-        this.maze = new Maze();
+        this.maze = new MazeBuilder();
     }
 
     public GameState getState() {
@@ -32,7 +32,7 @@ public class Player {
     public boolean startGame() {
         if (state == GameState.NOT_STARTED) {
             state = GameState.STARTED;
-            maze.generateMaze();
+            maze.build();
             character = new Character("Test character", 100, 1);
             character.move(maze.getEntrance());
             return true;
@@ -43,7 +43,7 @@ public class Player {
     public boolean endGame() {
         if (state != GameState.NOT_STARTED) {
             state = GameState.NOT_STARTED;
-            maze = new Maze();
+            maze = new MazeBuilder();
             return true;
         }
         return false;

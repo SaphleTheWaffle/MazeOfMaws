@@ -1,7 +1,6 @@
 package mazeofmaws.commands;
 
 import game.Player;
-import game.entities.Room;
 
 public class Look implements Command {
     @Override

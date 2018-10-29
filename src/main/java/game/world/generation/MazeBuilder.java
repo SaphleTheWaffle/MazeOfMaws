@@ -8,19 +8,30 @@ import java.util.Random;
 
 public class MazeBuilder {
 
-    private Random random = new Random();
+    private Random random;
     private RoomMap map;
+    private Room entrance;
     private Templates templates;
+
+    public MazeBuilder() {
+        this.random = new Random();
+        this.map = new RoomMap();
+        this.templates = Templates.getInstance();
+    }
 
     public RoomMap getMap() {
         return map;
     }
 
-    public Room build() {
+    public Room getEntrance() {
+        return entrance;
+    }
+
+    public void build() {
         map = new RoomMap();
-        templates = Templates.getInstance();
-        Room entrance = new Room();
+        entrance = new Room();
         entrance.setType(templates.getEntrance());
+        entrance.visit();
         map.setRoomAt(entrance, 0, 0, false);
 
         while (map.size() < 25) {
@@ -32,7 +43,6 @@ public class MazeBuilder {
             }
         }
         setRoomTypes();
-        return entrance;
     }
 
     private void buildConnectingRooms(RoomAndCoordinates rac) {

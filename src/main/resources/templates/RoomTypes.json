@@ -2,9 +2,19 @@
   "types":
     [
       {
+        "id": "corridor",
+        "name": "a stone corridor",
+        "description": "Flickering torches line the walls of this narrow stone corridor, providing barely enough light to see. Every now and then, the sound of a water droplet hitting the floor echoes from one of the numerous places where the arched ceiling is leaking.",
+        "categories": [
+          "corridor",
+          "dungeon"
+        ],
+        "rarity": 5
+      },
+      {
         "id": "entrance",
         "name": "a simple stone cell",
-        "description": "Large grey bricks are illuminated by the bleak light filtering in through a small, rough-cut skylight in the ceiling. Moss grows in the cracks between the stone, tracing the outlines in green like a maze of vegetation. In the corner of the room you can see a rough looking cot made from stone and lined with moist sticky hay. The smell of mildew fills the room and stuffs your nostrils as you try to breathe through the musty odour.",
+        "description": "Large grey bricks are illuminated by the bleak light filtering in through a small, rough-cut skylight in the ceiling. The room's only exit is a stark doorway, cold iron rod door left swinging on its hinges. Metal shackles hang from the wall, the cuffs rusted and old, but still strong enough to restrain an unruly captive. Moss grows in the cracks between the stone, tracing the outlines in green like a maze of vegetation. In the corner of the room you can see a rough looking cot made from stone and lined with moist sticky hay. A mildewy smell fills the room and stuffs your nostrils as you try to breathe through the musty odour.",
         "categories": [
           "safe"
         ],
@@ -16,16 +26,6 @@
         "description": "Compared to the rest of the maze, this room feels oppressively hot, and the stench of sulfur assaults your senses mercilessly. Jagged stalagmites jut out from the floor along the edges of the room and similarly wicked stalactites hang threateningly from the ceiling, but the room's centre seems to have been cleared out and flattened.",
         "categories": ["boss"],
         "rarity": 0
-      },
-      {
-        "id": "corridor",
-        "name": "a stone corridor",
-        "description": "Flickering torches line the walls, providing barely enough light to see.",
-        "categories": [
-          "corridor",
-          "dungeon"
-        ],
-        "rarity": 5
       },
       {
         "id": "fountain",
@@ -95,6 +95,16 @@
         "categories": [
           "dungeon",
           "statue"
+        ],
+        "rarity": 1
+      },
+      {
+        "id": "library",
+        "name": "a sprawling library",
+        "description": "The smell of musty books pervades long before you enter. The tall room stretches into the rafters high above.  Warped oaken bookcases tower into the darkness above; bent and twisted with age and laden with once-orderly books and tomes. The dim lanterns that hang on chains from the rafters cast an ominous haze throughout the dust-stricken archive. It’s an oppressive maze of disorderly shelves and stacks of discarded books tucked into every alcove.",
+        "categories": [
+          "dungeon",
+          "library"
         ],
         "rarity": 1
       }
