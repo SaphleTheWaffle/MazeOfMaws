@@ -56,6 +56,47 @@
           "cooking"
         ],
         "rarity": 1
+      },
+      {
+        "id": "lake",
+        "name": "an underground lake",
+        "description": "The majority of this room is taken up by a large underground lake. The glassy surface of the lake reflects the walls and ceiling perfectly, making the room appear even larger than it is, and the cool air comes as a welcome reprieve from the stale stuffiness of other parts of the maze.",
+        "categories": [
+          "dungeon",
+          "water"
+        ],
+        "rarity": 1
+      },
+      {
+        "id": "alchemy",
+        "name": "an alchemy laboratory",
+        "description": "Various benches and counters covered with various beakers, burners, and other laboratory equipment line this room. In certain spots, burn marks are visible on the counters, floor, and in a few cases even the ceiling. Multicoloured smoke, ostensibly from previous experiments, lingers in the air, bringing with it a plethora of smells and sensations as you move through the room. ",
+        "categories": [
+          "dungeon",
+          "lab",
+          "alchemy"
+        ],
+        "rarity": 1
+      },
+      {
+        "id": "graveyard",
+        "name": "a graveyard",
+        "description": "The floor, or rather ground, of this chamber is composed of soft soil. Row upon row of gravestones populate the area. Despite the lack of wind and weather underground, most of the gravestones look old and worn, what writing was once engraved in them being completely illegible. However, a few of the stones appear newer. ",
+        "categories": [
+          "dungeon",
+          "undead"
+        ],
+        "rarity": 1
+      },
+      {
+        "id": "statues",
+        "name": "a statue-lined corridor",
+        "description": "Large statues carved from stone line this corridor, all of which leer silently down at you as you pass underneath them. Each statue is unique, depicting a variety of fantastical creatures and humanoid monsters, some of which you recognise, though several of which are completely unfamiliar to you. The uncomfortable feeling of being watched hangs over you no matter where you go.",
+        "categories": [
+          "dungeon",
+          "statue"
+        ],
+        "rarity": 1
       }
     ]
 }
