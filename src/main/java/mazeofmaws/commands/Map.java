@@ -11,7 +11,7 @@ public class Map implements Command {
     @Override
     public String run(Player player, String args) {
         Room[][] grid = buildGrid(player.getMap().getRooms());
-        return print(grid);
+        return print(grid, player);
     }
 
     private Room[][] buildGrid(ArrayList<RoomAndCoordinates> list) {
@@ -44,11 +44,13 @@ public class Map implements Command {
         return grid;
     }
 
-    private String print(Room[][] grid) {
+    private String print(Room[][] grid, Player player) {
         StringBuilder sb = new StringBuilder("```\n");
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
-                if (grid[i][j] != null) {
+                if (grid[i][j] != null && grid[i][j].equals(player.getCharacter().getLocation())) {
+                    sb.append("X");
+                } else if (grid[i][j] != null && grid[i][j].isVisited()) {
                     sb.append(grid[i][j].getSymbol());
                 } else {
                     sb.append(" ");

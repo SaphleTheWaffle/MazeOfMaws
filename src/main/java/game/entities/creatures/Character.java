@@ -1,5 +1,6 @@
 package game.entities.creatures;
 
+import game.entities.Room;
 import game.entities.items.Item;
 
 import java.util.ArrayList;
@@ -11,6 +12,12 @@ public class Character extends Creature {
 
     public Character(String name, int maxHealth, int damage) {
         super(name, maxHealth, damage);
+    }
+
+    @Override
+    public void move(Room location) {
+        super.move(location);
+        location.visit();
     }
 
     @Override

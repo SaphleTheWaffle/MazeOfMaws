@@ -17,6 +17,7 @@ public class Room implements Describable {
     private List<Obstacle> obstacles;
     private Room[] exits;
     private RoomType type;
+    private boolean visited;
     private String id;
     private final static char[] symbols = {'□', 'o', 'o', '╔', 'o', '╗', '═', '╦', 'o', '║', '╚', '╠', '╝', '╣', '╩', '╬'};
 
@@ -27,6 +28,7 @@ public class Room implements Describable {
         obstacles = new ArrayList<>();
         exits = new Room[5];
         id = UUID.randomUUID().toString();
+        visited = false;
     }
 
     public void setExits(Room[] exits) {
@@ -100,6 +102,14 @@ public class Room implements Describable {
 
     public boolean hasType() {
         return type != null;
+    }
+
+    public void visit() {
+        visited = true;
+    }
+
+    public boolean isVisited() {
+        return visited;
     }
 
     @Override

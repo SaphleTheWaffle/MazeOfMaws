@@ -3,10 +3,16 @@
     [
       {
         "id": "entrance",
-        "description": "a small chamber with walls, floor, and ceiling made of stone. In a corner sits a large stone slab, roughly shaped like a bed.",
+        "description": "a damp cobble stone room. The large gray bricks are illuminated by the bleak light filtering in through a small, rough-cut skylight in the ceiling. Moss grows in the cracks between the stone, tracing the outlines in green like a maze of vegetation. In the corner of the room you can see a rough looking cot made from stone and lined with moist sticky hay. The smell of mildew fills the room and stuffs your nostrils as you try to breathe through the musty odour.",
         "categories": [
           "safe"
         ],
+        "rarity": 0
+      },
+      {
+        "id": "boss1",
+        "description": "a huge, cavernous room. Compared to the rest of the maze, this room feels oppressively hot, and the stench of sulfur assaults your senses mercilessly. Jagged stalagmites jut out from the floor along the edges of the room and similarly wicked stalactites hang threateningly from the ceiling, but the room's centre seems to have been cleared out and flattened.",
+        "categories": ["boss"],
         "rarity": 0
       },
       {
