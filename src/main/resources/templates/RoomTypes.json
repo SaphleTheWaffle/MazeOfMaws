@@ -4,7 +4,7 @@
       {
         "id": "corridor",
         "name": "a stone corridor",
-        "description": "Flickering torches line the walls of this narrow stone corridor, providing barely enough light to see. Every now and then, the sound of a water droplet hitting the floor echoes from one of the numerous places where the arched ceiling is leaking.",
+        "description": "Expanses of gray stone slick with moisture surround this hallway which is just wide enough for two people to stand side by side. The walls curve in as they reach the ceiling, forming an arched ceiling. The sound of dripping water echoes from the occasional small puddles as the ceiling leaks in various places. The only source of light in this stuffy, musty hallway are the torches lining the walls, placed much too far apart from each other leaving large patches of darkness.",
         "categories": [
           "corridor",
           "dungeon"
@@ -12,11 +12,20 @@
         "rarity": 5
       },
       {
+        "id": "cell",
+        "name": "a simple stone cell",
+        "description": "Water drips from the ceiling and pools in the centre of the floor of this bare stone cell, much like the one you woke up in. The door has long since rusted off its hinges, its remains lying haphazardly next to the metal frame. A stone slab roughly shaped like a bed sits in the corner, which presumably held hay or some other type of bedding at one point.",
+        "categories": [
+          "cell"
+        ],
+        "rarity": 0
+      },
+      {
         "id": "entrance",
         "name": "a simple stone cell",
         "description": "Large grey bricks are illuminated by the bleak light filtering in through a small, rough-cut skylight in the ceiling. The room's only exit is a stark doorway, cold iron rod door left swinging on its hinges. Metal shackles hang from the wall, the cuffs rusted and old, but still strong enough to restrain an unruly captive. Moss grows in the cracks between the stone, tracing the outlines in green like a maze of vegetation. In the corner of the room you can see a rough looking cot made from stone and lined with moist sticky hay. A mildewy smell fills the room and stuffs your nostrils as you try to breathe through the musty odour.",
         "categories": [
-          "safe"
+          "entrance"
         ],
         "rarity": 0
       },
@@ -50,7 +59,7 @@
       {
         "id": "kitchen",
         "name": "a kitchen",
-        "description": "A large oven sits against one wall, and a series of counters with various cooking implements line the room.",
+        "description": "An odd but not unpleasant smell wafts to your nose as you look around. A large brick oven sits at the corner of the room with a roaring fire at its core, and an opening on the side big enough for someone to walk through. Along the stone counter are pots and pans in varying states of cleanliness. Ladles, spoons, forks, knives, and all other forms of cooking utensils hang from hooks above the cooking station.",
         "categories": [
           "dungeon",
           "cooking"

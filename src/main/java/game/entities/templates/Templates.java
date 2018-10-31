@@ -65,21 +65,19 @@ public class Templates {
         return null;
     }
 
-    public RoomType getEntrance() {
-        for (RoomType rt : roomTypes) {
-            if (rt.getId().equals("entrance")) {
-                return rt;
-            }
-        }
-        System.out.println("No entrance found!");
-        return null;
+    public RoomType getByCategory(String category) {
+        List<RoomType> types = roomTypes.stream()
+                .filter(e -> e.getCategories().contains(category))
+                .collect(Collectors.toList());
+        int index = random.nextInt(types.size());
+        return types.get(index);
     }
 
-    public RoomType getBossRoom() {
-        List<RoomType> bossRooms = roomTypes.stream()
-                .filter(e -> e.getId().contains("boss"))
-                .collect(Collectors.toList());
-        int index = random.nextInt(bossRooms.size());
-        return bossRooms.get(index);
+    public List<RoomType> getNumberByCategory(String category, int num) {
+        List<RoomType> results = new ArrayList<>();
+        for (int i = 0; i < num; i++) {
+            results.add(getByCategory(category));
+        }
+        return results;
     }
 }

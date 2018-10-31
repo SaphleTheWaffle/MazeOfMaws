@@ -1,9 +1,13 @@
 package game.world.generation;
 
 import game.entities.Room;
+import game.entities.templates.RoomType;
 import game.entities.templates.Templates;
 import game.world.Direction;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class MazeBuilder {
@@ -29,10 +33,7 @@ public class MazeBuilder {
 
     public void build() {
         map = new RoomMap();
-        entrance = new Room();
-        entrance.setType(templates.getEntrance());
-        entrance.visit();
-        map.setRoomAt(entrance, 0, 0, false);
+        map.setRoomAt(new Room(), 0, 0, false);
 
         while (map.size() < 25) {
             for (int i = 0; i < map.size(); i++) {
@@ -78,10 +79,22 @@ public class MazeBuilder {
     }
 
     private void setRoomTypes() {
-        for (RoomAndCoordinates rac : map.getRooms()) {
-            if (!rac.getRoom().hasType()) {
-                rac.getRoom().setType(templates.getRoomType());
+        List<RoomAndCoordinates> deadEnds = map.getDeadEnds();
+        Collections.shuffle(deadEnds);
+        List<RoomType> deadEndTypes = new ArrayList<>();
+        deadEndTypes.add(templates.getByCategory("entrance"));
+        deadEndTypes.add(templates.getByCategory("boss"));
+        deadEndTypes.addAll(templates.getNumberByCategory("cell", 3));
+
+        for (int i = 0; i < deadEnds.size() && i < deadEndTypes.size(); i++) {
+            deadEnds.get(i).getRoom().setType(deadEndTypes.get(i));
+            if (i == 0) {
+                entrance = deadEnds.get(i).getRoom();
+                entrance.visit();
             }
         }
+        map.getRooms().stream()
+                .filter(e -> !e.getRoom().hasType())
+                .forEach(e -> e.getRoom().setType(templates.getRoomType()));
     }
 }

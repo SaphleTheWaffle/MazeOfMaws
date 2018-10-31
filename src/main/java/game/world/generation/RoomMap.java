@@ -3,6 +3,8 @@ package game.world.generation;
 import game.entities.Room;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RoomMap {
     private ArrayList<RoomAndCoordinates> rooms;
@@ -44,5 +46,11 @@ public class RoomMap {
             }
         }
         rooms.add(new RoomAndCoordinates(coords, room, corridor));
+    }
+
+    public List<RoomAndCoordinates> getDeadEnds() {
+        return rooms.stream()
+                .filter(e -> e.getRoom().numberOfExits() == 1)
+                .collect(Collectors.toList());
     }
 }
