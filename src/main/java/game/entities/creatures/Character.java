@@ -25,10 +25,23 @@ public class Character extends Creature {
 
     public String describeItem(String itemName) {
         for (Item i : inventory) {
-            if (i.getName().equals(itemName)) {
+            if (i.getName().contains(itemName)) {
                 return i.describe();
             }
         }
         return "";
+    }
+
+    public boolean pickupItem(String itemName) {
+        Item item = location.pickupItem(itemName);
+        if (item != null) {
+            inventory.add(item);
+            return true;
+        }
+        return false;
+    }
+
+    public List<Item> getInventory() {
+        return inventory;
     }
 }

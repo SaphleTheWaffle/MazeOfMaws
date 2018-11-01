@@ -28,6 +28,7 @@ class CommandExecutor {
         gameMap.put("look", new Look());
         gameMap.put("go", new Go());
         gameMap.put("map", new Map());
+        gameMap.put("get", new Get());
     }
 
     String sendWelcomeMessage(MessageReceivedEvent event) {

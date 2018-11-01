@@ -1,6 +1,7 @@
 package game.world.generation;
 
 import game.entities.Room;
+import game.entities.items.Item;
 import game.entities.templates.Encounter;
 import game.entities.templates.RoomType;
 import game.entities.templates.Templates;
@@ -104,9 +105,10 @@ public class MazeBuilder {
             if (i == 0) {
                 entrance = currentRoom;
                 entrance.visit();
-            }
-            if (currentRoom.getTypeCategories().contains("boss")) {
+            } else if (currentRoom.getTypeCategories().contains("boss")) {
                 setExitLocked(currentRoom);
+            } else {
+                currentRoom.addItem(new Item("key", true, "a large key", "A large, heavy key engraved with fancy designs."));
             }
         }
     }
@@ -115,7 +117,7 @@ public class MazeBuilder {
         for (int i = 0; i < Direction.values().length; i++) {
             Room neighbour = currentRoom.getExit(Direction.valueOf(i));
             if (neighbour != null) {
-                neighbour.setEncounter(new Encounter("test", true, Direction.valueOf(i).getOpposite(), false));
+                neighbour.setEncounter(new Encounter("test", true, Direction.valueOf(i).getOpposite(), true));
             }
         }
     }

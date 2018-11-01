@@ -53,13 +53,19 @@ public class Player {
         return character.getLocation().isExitLocked(direction);
     }
 
-    public boolean move(Direction direction) {
+    public String move(Direction direction) {
         Room newRoom = character.getLocation().getExit(direction);
+        if (character.getLocation().isExitLocked(direction)) {
+            if (character.getLocation().unlock(character.getInventory())) {
+                return character.getLocation().getExitUnlockedMessage();
+            }
+            return character.getLocation().getExitBlockedMessage();
+        }
         if (newRoom != null) {
             character.move(newRoom);
-            return true;
+            return "Moving through the " + direction.name +"ern exit, you find yourself in " + character.enterRoom();
         }
-        return false;
+        return "There is no exit in that direction!";
     }
 
     public String describeRoom() {
@@ -76,6 +82,10 @@ public class Player {
             res = character.getLocation().describeItem(itemName);
         }
         return res;
+    }
+
+    public boolean pickupItem(String itemName) {
+        return character.pickupItem(itemName);
     }
 
     String getId() {

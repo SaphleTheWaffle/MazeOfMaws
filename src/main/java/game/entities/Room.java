@@ -35,7 +35,10 @@ public class Room {
     }
 
     public Room getExit(Direction direction) {
-        return exits[direction.index];
+        if (direction != null) {
+            return exits[direction.index];
+        }
+        return null;
     }
 
     public void setExit(Room room, Direction dir) {
@@ -46,9 +49,13 @@ public class Room {
         return encounter != null && encounter.isBlocking() && encounter.getExit().equals(dir);
     }
 
+    public boolean unlock(List<Item> items) {
+        return encounter != null && encounter.unlock(items);
+    }
+
     public String describeItem(String itemName) {
         for (Item i : items) {
-            if (i.getName().equals(itemName)) {
+            if (i.getName().contains(itemName)) {
                 return i.describe();
             }
         }
@@ -104,8 +111,8 @@ public class Room {
 
     private String getDetailedDescription() {
         return StringUtils.bold(type.getName()) + StringUtils.SEPARATOR +
-                type.getDescription() +
-                ((items.size() > 0) ? (formatItemsString() + StringUtils.SEPARATOR) : StringUtils.SEPARATOR) +
+                type.getDescription() + StringUtils.SEPARATOR +
+                ((items.size() > 0) ? (formatItemsString() + StringUtils.SEPARATOR) : "") +
                 formatExitsString();
     }
 
@@ -125,6 +132,10 @@ public class Room {
             things.add(StringUtils.underline(thing.getName()));
         }
         return String.join(", ", things);
+    }
+
+    public void addItem(Item item) {
+        items.add(item);
     }
 
     private String formatExitsString() {
@@ -159,5 +170,23 @@ public class Room {
 
     public void setEncounter(Encounter encounter) {
         this.encounter = encounter;
+    }
+
+    public String getExitBlockedMessage() {
+        return encounter.getBlockingMessage();
+    }
+
+    public String getExitUnlockedMessage() {
+        return encounter.getRemoveBlockingMessage();
+    }
+
+    public Item pickupItem(String name) {
+        for (Item item : items) {
+            if (item.getName().contains(name) && item.isPickupable()) {
+                items.remove(item);
+                return item;
+            }
+        }
+        return null;
     }
 }
