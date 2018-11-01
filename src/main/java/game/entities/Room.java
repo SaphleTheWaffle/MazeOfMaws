@@ -1,8 +1,6 @@
 package game.entities;
 
-import game.entities.creatures.Creature;
-import game.entities.items.Item;
-import game.entities.obstacles.Obstacle;
+import game.entities.items.Inventory;
 import game.entities.templates.Encounter;
 import game.entities.templates.RoomType;
 import game.world.Direction;
@@ -11,12 +9,11 @@ import utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class Room {
 
-    private List<Item> items;
-    private List<Creature> creatures;
-    private List<Obstacle> obstacles;
+    private Inventory inventory;
     private Encounter encounter;
     private Room[] exits;
     private RoomType type;
@@ -24,11 +21,8 @@ public class Room {
     private String id;
     private final static char[] SYMBOLS = {'□', 'o', 'o', '╔', 'o', '╗', '═', '╦', 'o', '║', '╚', '╠', '╝', '╣', '╩', '╬'};
 
-
     public Room() {
-        items = new ArrayList<>();
-        creatures = new ArrayList<>();
-        obstacles = new ArrayList<>();
+        inventory = new Inventory();
         exits = new Room[5];
         id = UUID.randomUUID().toString();
         visited = false;
@@ -47,19 +41,6 @@ public class Room {
 
     public boolean isExitLocked(Direction dir) {
         return encounter != null && encounter.isBlocking() && encounter.getExit().equals(dir);
-    }
-
-    public boolean unlock(List<Item> items) {
-        return encounter != null && encounter.unlock(items);
-    }
-
-    public String describeItem(String itemName) {
-        for (Item i : items) {
-            if (i.getName().contains(itemName)) {
-                return i.describe();
-            }
-        }
-        return "";
     }
 
     public int numberOfExits() {
@@ -112,13 +93,13 @@ public class Room {
     private String getDetailedDescription() {
         return StringUtils.bold(type.getName()) + StringUtils.SEPARATOR +
                 type.getDescription() + StringUtils.SEPARATOR +
-                ((items.size() > 0) ? (formatItemsString() + StringUtils.SEPARATOR) : "") +
+                ((inventory.size() > 0) ? (formatItemsString() + StringUtils.SEPARATOR) : "") +
                 formatExitsString();
     }
 
     private String getShortDescription() {
-        return StringUtils.bold(type.getName()) +
-                ((items.size() > 0) ? (formatItemsString() + StringUtils.SEPARATOR) : StringUtils.SEPARATOR) +
+        return StringUtils.bold(type.getName()) + StringUtils.SEPARATOR +
+                ((inventory.size() > 0) ? (formatItemsString() + StringUtils.SEPARATOR) : "") +
                 formatExitsString();
     }
 
@@ -127,15 +108,14 @@ public class Room {
     }
 
     private String listItems() {
-        List<String> things = new ArrayList<>();
-        for (Item thing : items) {
-            things.add(StringUtils.underline(thing.getName()));
-        }
+        List<String> things = inventory.getItemNames().stream()
+                .map(StringUtils::underline)
+                .collect(Collectors.toList());
         return String.join(", ", things);
     }
 
-    public void addItem(Item item) {
-        items.add(item);
+    public Inventory getInventory() {
+        return inventory;
     }
 
     private String formatExitsString() {
@@ -172,21 +152,7 @@ public class Room {
         this.encounter = encounter;
     }
 
-    public String getExitBlockedMessage() {
-        return encounter.getBlockingMessage();
-    }
-
-    public String getExitUnlockedMessage() {
-        return encounter.getRemoveBlockingMessage();
-    }
-
-    public Item pickupItem(String name) {
-        for (Item item : items) {
-            if (item.getName().contains(name) && item.isPickupable()) {
-                items.remove(item);
-                return item;
-            }
-        }
-        return null;
+    public Encounter getEncounter() {
+        return encounter;
     }
 }

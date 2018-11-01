@@ -108,7 +108,7 @@ public class MazeBuilder {
             } else if (currentRoom.getTypeCategories().contains("boss")) {
                 setExitLocked(currentRoom);
             } else {
-                currentRoom.addItem(new Item("key", true, "a large key", "A large, heavy key engraved with fancy designs."));
+                currentRoom.getInventory().addItem(new Item("key", true, "a large key", "A large, heavy key engraved with fancy designs."));
             }
         }
     }

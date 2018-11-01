@@ -1,21 +1,23 @@
 package game.entities.templates;
 
-import game.entities.items.Item;
+import game.entities.items.Inventory;
 import game.world.Direction;
-
-import java.util.List;
 
 public class Encounter {
     private String id;
     private boolean blocking;
     private Direction exit;
     private boolean active;
+    private String keyId;
 
     public Encounter(String id, boolean blocking, Direction exit, boolean active) {
         this.id = id;
         this.blocking = blocking;
         this.exit = exit;
         this.active = active;
+        if (blocking) {
+            keyId = "key";
+        }
     }
 
     public String getId() {
@@ -44,8 +46,8 @@ public class Encounter {
                 "rewarded with a loud 'click!'. The door is now unlocked.";
     }
 
-    public boolean unlock(List<Item> items) {
-        if (items.stream().anyMatch(e -> e.getId().equals("key"))) {
+    public boolean unlock(Inventory inventory) {
+        if (isBlocking() && inventory.getItemById(keyId) != null) {
             active = false;
             return true;
         }
