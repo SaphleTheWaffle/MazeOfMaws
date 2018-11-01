@@ -49,6 +49,10 @@ public class Player {
         return false;
     }
 
+    public boolean isExitLocked(Direction direction) {
+        return character.getLocation().isExitLocked(direction);
+    }
+
     public boolean move(Direction direction) {
         Room newRoom = character.getLocation().getExit(direction);
         if (newRoom != null) {

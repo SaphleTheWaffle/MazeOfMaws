@@ -17,4 +17,8 @@ public class StringUtils {
     public static String boldItalics(String s) {
         return bold(italics(s));
     }
+
+    public static String underline(String s) {
+        return "__" + s + "__";
+    }
 }
