@@ -2,6 +2,7 @@ package game;
 
 import game.entities.Room;
 import game.entities.creatures.Character;
+import game.entities.items.Item;
 import game.entities.templates.Encounter;
 import game.world.Direction;
 import game.world.generation.MazeBuilder;
@@ -57,10 +58,6 @@ public class Player {
     public String move(Direction direction) {
         Room newRoom = character.getLocation().getExit(direction);
         if (character.getLocation().isExitLocked(direction)) {
-            Encounter roomEncounter = character.getLocation().getEncounter();
-            if (roomEncounter.unlock(character.getInventory())) {
-                return roomEncounter.getRemoveBlockingMessage();
-            }
             return character.getLocation().getEncounter().getBlockingMessage();
         }
         if (newRoom != null) {
@@ -68,6 +65,18 @@ public class Player {
             return "Moving through the " + direction.name +"ern exit, you find yourself in " + character.enterRoom();
         }
         return "There is no exit in that direction!";
+    }
+
+    public String useItem(String itemName) {
+        Encounter roomEncounter = character.getLocation().getEncounter();
+        Item item = character.getInventory().getItemByName(itemName);
+        if (roomEncounter != null && roomEncounter.checkUseItem(item)) {
+            return roomEncounter.getRemoveBlockingMessage();
+        }
+        if (item != null && item.use()) {
+            return "You used " + item.getName() + ".";
+        }
+        return "You can't use that!";
     }
 
     public String describeRoom() {

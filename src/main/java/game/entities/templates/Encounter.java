@@ -1,6 +1,6 @@
 package game.entities.templates;
 
-import game.entities.items.Inventory;
+import game.entities.items.Item;
 import game.world.Direction;
 
 public class Encounter {
@@ -46,8 +46,8 @@ public class Encounter {
                 "rewarded with a loud 'click!'. The door is now unlocked.";
     }
 
-    public boolean unlock(Inventory inventory) {
-        if (isBlocking() && inventory.getItemById(keyId) != null) {
+    public boolean checkUseItem(Item item) {
+        if (isBlocking() && item != null && item.getId().equals(keyId)) {
             active = false;
             return true;
         }

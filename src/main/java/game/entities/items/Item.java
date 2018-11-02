@@ -30,4 +30,8 @@ public class Item {
     public String describe() {
         return StringUtils.bold(name) + StringUtils.SEPARATOR + description;
     }
+
+    public boolean use() {
+        return false;
+    }
 }
