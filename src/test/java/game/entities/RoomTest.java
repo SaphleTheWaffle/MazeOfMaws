@@ -36,6 +36,6 @@ public class RoomTest {
             origin.setExit(exits[i], Direction.valueOf(i));
         }
 
-        assertEquals("north, west, east, south", origin.getExits());
+        assertEquals("north, west, east, south", origin.listExits());
     }
 }

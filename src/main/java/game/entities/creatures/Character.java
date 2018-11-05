@@ -1,16 +1,15 @@
 package game.entities.creatures;
 
+import game.entities.items.Inventory;
 import game.entities.items.Item;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Character extends Creature {
 
-    private List<Item> inventory = new ArrayList<>();
+    private Inventory inventory;
 
     public Character(String name, int maxHealth, int damage) {
         super(name, maxHealth, damage);
+        inventory = new Inventory();
     }
 
     public String enterRoom() {
@@ -24,11 +23,20 @@ public class Character extends Creature {
     }
 
     public String describeItem(String itemName) {
-        for (Item i : inventory) {
-            if (i.getName().equals(itemName)) {
-                return i.describe();
-            }
+        Item i = inventory.getItemByName(itemName);
+        return i != null ? i.describe() : "";
+    }
+
+    public boolean pickupItem(String itemName) {
+        Inventory roomItems = location.getInventory();
+        Item item = roomItems.getItemByName(itemName);
+        if (item != null && item.isPickupable()) {
+            return inventory.addItem(roomItems.removeItem(item));
         }
-        return "";
+        return false;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
     }
 }

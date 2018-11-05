@@ -2,6 +2,8 @@ package game;
 
 import game.entities.Room;
 import game.entities.creatures.Character;
+import game.entities.items.Item;
+import game.entities.templates.Encounter;
 import game.world.Direction;
 import game.world.generation.MazeBuilder;
 import game.world.generation.RoomMap;
@@ -49,29 +51,48 @@ public class Player {
         return false;
     }
 
-    public boolean move(Direction direction) {
+    public boolean isExitLocked(Direction direction) {
+        return character.getLocation().isExitLocked(direction);
+    }
+
+    public String move(Direction direction) {
         Room newRoom = character.getLocation().getExit(direction);
+        if (character.getLocation().isExitLocked(direction)) {
+            return character.getLocation().getEncounter().getBlockingMessage();
+        }
         if (newRoom != null) {
             character.move(newRoom);
-            return true;
+            return "Moving through the " + direction.name +"ern exit, you find yourself in " + character.enterRoom();
         }
-        return false;
+        return "There is no exit in that direction!";
+    }
+
+    public String useItem(String itemName) {
+        Encounter roomEncounter = character.getLocation().getEncounter();
+        Item item = character.getInventory().getItemByName(itemName);
+        if (roomEncounter != null && roomEncounter.checkUseItem(item)) {
+            return roomEncounter.getRemoveBlockingMessage();
+        }
+        if (item != null && item.use()) {
+            return "You used " + item.getName() + ".";
+        }
+        return "You can't use that!";
     }
 
     public String describeRoom() {
         return character.describeRoom();
     }
 
-    public String enterRoom() {
-        return character.enterRoom();
-    }
-
     public String describeItem(String itemName) {
         String res = character.describeItem(itemName);
         if (res.equals("")) {
-            res = character.getLocation().describeItem(itemName);
+            res = character.getLocation().getInventory().describeItem(itemName);
         }
         return res;
+    }
+
+    public boolean pickupItem(String itemName) {
+        return character.pickupItem(itemName);
     }
 
     String getId() {

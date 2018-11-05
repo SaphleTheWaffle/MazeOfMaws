@@ -1,6 +1,8 @@
 package game.world.generation;
 
 import game.entities.Room;
+import game.entities.items.Item;
+import game.entities.templates.Encounter;
 import game.entities.templates.RoomType;
 import game.entities.templates.Templates;
 import game.world.Direction;
@@ -79,22 +81,44 @@ public class MazeBuilder {
     }
 
     private void setRoomTypes() {
+        setDeadEndRoomTypes();
+        setRegularRoomTypes();
+    }
+
+    private void setRegularRoomTypes() {
+        map.getRooms().stream()
+                .filter(e -> !e.getRoom().hasType())
+                .forEach(e -> e.getRoom().setType(templates.getRoomType()));
+    }
+
+    private void setDeadEndRoomTypes() {
         List<RoomAndCoordinates> deadEnds = map.getDeadEnds();
         Collections.shuffle(deadEnds);
         List<RoomType> deadEndTypes = new ArrayList<>();
         deadEndTypes.add(templates.getByCategory("entrance"));
         deadEndTypes.add(templates.getByCategory("boss"));
-        deadEndTypes.addAll(templates.getNumberByCategory("cell", 3));
+        deadEndTypes.addAll(templates.getNumberByCategory("cell", 4));
 
         for (int i = 0; i < deadEnds.size() && i < deadEndTypes.size(); i++) {
-            deadEnds.get(i).getRoom().setType(deadEndTypes.get(i));
+            Room currentRoom = deadEnds.get(i).getRoom();
+            currentRoom.setType(deadEndTypes.get(i));
             if (i == 0) {
-                entrance = deadEnds.get(i).getRoom();
+                entrance = currentRoom;
                 entrance.visit();
+            } else if (currentRoom.getTypeCategories().contains("boss")) {
+                setExitLocked(currentRoom);
+            } else {
+                currentRoom.getInventory().addItem(new Item("key", true, "a large key", "A large, heavy key engraved with fancy designs."));
             }
         }
-        map.getRooms().stream()
-                .filter(e -> !e.getRoom().hasType())
-                .forEach(e -> e.getRoom().setType(templates.getRoomType()));
+    }
+
+    private void setExitLocked(Room currentRoom) {
+        for (int i = 0; i < Direction.values().length; i++) {
+            Room neighbour = currentRoom.getExit(Direction.valueOf(i));
+            if (neighbour != null) {
+                neighbour.setEncounter(new Encounter("test", true, Direction.valueOf(i).getOpposite(), true));
+            }
+        }
     }
 }

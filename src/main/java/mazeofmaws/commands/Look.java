@@ -8,7 +8,7 @@ public class Look implements Command {
         if (args == null || args.equals("")) {
             return describeRoom(player);
         }
-        return describeItem(player, args);
+        return describeItem(player, args.trim().toLowerCase());
     }
 
     private String describeRoom(Player player) {
