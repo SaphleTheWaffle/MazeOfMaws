@@ -19,6 +19,7 @@ public class MazeOfMaws {
         if (token == null || token.length() < 1) {
             System.out.println("No login token found! Please store it at the following path:");
             System.out.println("MazeOfMaws/src/main/resources/token.txt");
+            System.out.println("Or as an environment variable named \'MOM_TOKEN\'");
             return;
         }
         builder.setToken(token);
@@ -35,7 +36,6 @@ public class MazeOfMaws {
                 encoded = Files.readAllBytes(Paths.get(TEST_TOKEN_PATH));
             }
         } catch (IOException e) {
-            e.printStackTrace();
             return System.getenv("MOM_TOKEN");
         }
         return new String(encoded);

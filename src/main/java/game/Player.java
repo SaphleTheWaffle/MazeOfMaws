@@ -5,6 +5,7 @@ import game.entities.creatures.Character;
 import game.entities.items.Item;
 import game.entities.templates.Encounter;
 import game.world.Direction;
+import game.world.generation.GenericMazeBuilder;
 import game.world.generation.MazeBuilder;
 import game.world.generation.RoomMap;
 import net.dv8tion.jda.core.entities.User;
@@ -24,7 +25,7 @@ public class Player {
         this.id = user.getId();
         this.name = user.getName();
         this.state = GameState.NOT_STARTED;
-        this.maze = new MazeBuilder();
+        this.maze = new GenericMazeBuilder();
     }
 
     public GameState getState() {
@@ -45,7 +46,7 @@ public class Player {
     public boolean endGame() {
         if (state != GameState.NOT_STARTED) {
             state = GameState.NOT_STARTED;
-            maze = new MazeBuilder();
+            maze = new GenericMazeBuilder();
             return true;
         }
         return false;
