@@ -4,12 +4,16 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '2.0.1'
 }
 
-mainClassName = "mazeofmaws.mazeofmaws"
+mainClassName = "mazeofmaws.MazeOfMaws"
 
 group 'com.saphlethewaffle'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
+compileJava.options.encoding = 'UTF-8'
+
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
 
 repositories {
     mavenCentral()
@@ -22,5 +26,4 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-core', version: '2.19.0'
     // https://mvnrepository.com/artifact/org.testng/testng
     testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
-
 }
