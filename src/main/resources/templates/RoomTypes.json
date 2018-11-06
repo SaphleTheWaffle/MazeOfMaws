@@ -30,6 +30,15 @@
         "rarity": 0
       },
       {
+        "id": "warden_office",
+        "name": "the warden's office",
+        "description": "A large wooden desk stands in the middle of this room, filing cabinets lining the wall behind it. This appears to be some sort of office, though the floor, walls, and ceiling are made out of the same rough stone as the rest of the complex, making for a strange juxtaposition of \"office\" and \"dungeon\" aesthetics.",
+        "categories": [
+          "warden"
+        ],
+        "rarity": 0
+      },
+      {
         "id": "boss1",
         "name": "a cavernous lair",
         "description": "Compared to the rest of the maze, this room feels oppressively hot, and the stench of sulfur assaults your senses mercilessly. Jagged stalagmites jut out from the floor along the edges of the room and similarly wicked stalactites hang threateningly from the ceiling, but the room's centre seems to have been cleared out and flattened.",

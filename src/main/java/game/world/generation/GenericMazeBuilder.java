@@ -2,7 +2,7 @@ package game.world.generation;
 
 import game.entities.Room;
 import game.entities.items.Item;
-import game.entities.templates.Encounter;
+import game.entities.obstacles.Obstacle;
 import game.entities.templates.RoomType;
 import game.world.Direction;
 
@@ -109,7 +109,7 @@ public class GenericMazeBuilder extends MazeBuilder {
         for (int i = 0; i < Direction.values().length; i++) {
             Room neighbour = currentRoom.getExit(Direction.valueOf(i));
             if (neighbour != null) {
-                neighbour.setEncounter(new Encounter("test", true, Direction.valueOf(i).getOpposite(), true));
+                neighbour.addObstacle(new Obstacle(Direction.valueOf(i).getOpposite(), "key", true));
             }
         }
     }

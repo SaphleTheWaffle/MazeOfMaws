@@ -46,8 +46,8 @@ public class PrisonBuilder extends MazeBuilder {
         Collections.shuffle(deadEnds);
         List<RoomType> deadEndTypes = new ArrayList<>();
         deadEndTypes.add(templates.getByCategory("entrance"));
-        deadEndTypes.addAll(templates.getNumberByCategory("cell", 3));
-
+        deadEndTypes.add(templates.getByCategory("warden"));
+        deadEndTypes.addAll(templates.getNumberByCategory("cell", 2));
         for (int i = 0; i < deadEnds.size() && i < deadEndTypes.size(); i++) {
             Room currentRoom = deadEnds.get(i).getRoom();
             currentRoom.setType(deadEndTypes.get(i));

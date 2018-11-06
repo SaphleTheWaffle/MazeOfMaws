@@ -1,6 +1,7 @@
 package game.entities;
 
 import game.entities.items.Inventory;
+import game.entities.obstacles.Obstacle;
 import game.entities.templates.Encounter;
 import game.entities.templates.RoomType;
 import game.world.Direction;
@@ -16,6 +17,7 @@ public class Room {
     private Inventory inventory;
     private Encounter encounter;
     private Room[] exits;
+    private List<Obstacle> obstacles;
     private RoomType type;
     private boolean visited;
     private String id;
@@ -26,6 +28,7 @@ public class Room {
         exits = new Room[5];
         id = UUID.randomUUID().toString();
         visited = false;
+        obstacles = new ArrayList<>();
     }
 
     public Room getExit(Direction direction) {
@@ -40,7 +43,16 @@ public class Room {
     }
 
     public boolean isExitLocked(Direction dir) {
-        return encounter != null && encounter.isBlocking() && encounter.getExit().equals(dir);
+        return obstacles.stream()
+                .filter(e -> e.getDirection().equals(dir))
+                .anyMatch(Obstacle::isActive);
+    }
+
+    public Obstacle getObstacle(Direction dir) {
+        return obstacles.stream()
+                .filter(e -> e.getDirection().equals(dir))
+                .findFirst()
+                .orElse(null);
     }
 
     public int numberOfExits() {
@@ -51,6 +63,10 @@ public class Room {
             }
         }
         return num;
+    }
+
+    public void addObstacle(Obstacle obstacle) {
+        obstacles.add(obstacle);
     }
 
     public char getSymbol() {
@@ -127,10 +143,9 @@ public class Room {
 
     String listExits() {
         List<String> dirs = new ArrayList<>();
-        Direction blockedExit = lockedDoor();
         for (int i = 0; i < exits.length; i++) {
             if (exits[i] != null) {
-                if (blockedExit != null && i == blockedExit.index) {
+                if (isExitLocked(Direction.valueOf(i))) {
                     dirs.add(StringUtils.italics(Direction.valueOf(i).name) + " (locked)");
                 } else {
                     dirs.add(StringUtils.italics(Direction.valueOf(i).name));
@@ -138,13 +153,6 @@ public class Room {
             }
         }
         return StringUtils.listify(dirs);
-    }
-
-    private Direction lockedDoor() {
-        if (encounter != null && encounter.isBlocking()) {
-            return encounter.getExit();
-        }
-        return null;
     }
 
     public List<String> getTypeCategories() {

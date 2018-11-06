@@ -3,12 +3,15 @@ package game;
 import game.entities.Room;
 import game.entities.creatures.Character;
 import game.entities.items.Item;
-import game.entities.templates.Encounter;
+import game.entities.obstacles.Obstacle;
 import game.world.Direction;
 import game.world.generation.MazeBuilder;
 import game.world.generation.PrisonBuilder;
 import game.world.generation.RoomMap;
 import net.dv8tion.jda.core.entities.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
     private String id;
@@ -51,32 +54,49 @@ public class Player {
         return false;
     }
 
-    public boolean isExitLocked(Direction direction) {
-        return character.getLocation().isExitLocked(direction);
-    }
-
     public String move(Direction direction) {
         Room newRoom = character.getLocation().getExit(direction);
         if (character.getLocation().isExitLocked(direction)) {
-            return character.getLocation().getEncounter().getBlockingMessage();
+            return character.getLocation().getObstacle(direction).getBlockingMessage();
         }
         if (newRoom != null) {
             character.move(newRoom);
-            return "Moving through the " + direction.name +"ern exit, you find yourself in " + character.enterRoom();
+            return "Moving towards the " + direction.name +", you find yourself in " + character.enterRoom();
         }
         return "There is no exit in that direction!";
     }
 
-    public String useItem(String itemName) {
-        Encounter roomEncounter = character.getLocation().getEncounter();
+    public String useItem(String itemName, String target) {
         Item item = character.getInventory().getItemByName(itemName);
-        if (roomEncounter != null && roomEncounter.checkUseItem(item)) {
-            return roomEncounter.getRemoveBlockingMessage();
+        if (item == null) {
+            return "Could not find an item matching that name.";
         }
-        if (item != null && item.use()) {
+        if (item.getId().contains("key")) {
+            return useKey(target, item);
+        }
+        if (item.use()) {
             return "You used " + item.getName() + ".";
         }
         return "You can't use that!";
+    }
+
+    private String useKey(String target, Item item) {
+        List<Direction> directions = new ArrayList<>();
+        for (Direction dir : Direction.values()) {
+            if (target.contains(dir.name)) {
+                directions.add(dir);
+            }
+        }
+        if (directions.size() != 1) {
+            return "Which door would you like to unlock?";
+        }
+
+        Direction d = directions.get(0);
+        Obstacle obstacle = character.getLocation().getObstacle(d);
+        if (obstacle != null && obstacle.checkItem(item)) {
+            return obstacle.getUnblockedMessage();
+        }
+        return "That door is not locked.";
     }
 
     public String describeRoom() {
