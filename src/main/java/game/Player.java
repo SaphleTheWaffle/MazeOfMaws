@@ -7,6 +7,7 @@ import game.entities.templates.Encounter;
 import game.world.Direction;
 import game.world.generation.GenericMazeBuilder;
 import game.world.generation.MazeBuilder;
+import game.world.generation.PrisonBuilder;
 import game.world.generation.RoomMap;
 import net.dv8tion.jda.core.entities.User;
 
@@ -25,7 +26,7 @@ public class Player {
         this.id = user.getId();
         this.name = user.getName();
         this.state = GameState.NOT_STARTED;
-        this.maze = new GenericMazeBuilder();
+        this.maze = new PrisonBuilder();
     }
 
     public GameState getState() {
