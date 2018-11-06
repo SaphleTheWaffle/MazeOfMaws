@@ -134,7 +134,7 @@ public class Room {
                 }
             }
         }
-        return String.join(", ", dirs);
+        return StringUtils.listify(dirs);
     }
 
     private Direction lockedDoor() {
