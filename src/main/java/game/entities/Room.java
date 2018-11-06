@@ -111,7 +111,7 @@ public class Room {
         List<String> things = inventory.getItemNames().stream()
                 .map(StringUtils::underline)
                 .collect(Collectors.toList());
-        return String.join(", ", things);
+        return StringUtils.listify(things);
     }
 
     public Inventory getInventory() {
@@ -119,7 +119,10 @@ public class Room {
     }
 
     private String formatExitsString() {
-        return "Exits: " + listExits();
+        if (numberOfExits() == 1) {
+            return "There is an exit to the " + listExits();
+        }
+        return "Exits are to the " + listExits();
     }
 
     String listExits() {
