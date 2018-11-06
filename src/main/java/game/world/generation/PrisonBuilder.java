@@ -1,6 +1,7 @@
 package game.world.generation;
 
 import game.entities.Room;
+import game.entities.items.Item;
 import game.entities.templates.RoomType;
 import game.world.Direction;
 
@@ -54,6 +55,10 @@ public class PrisonBuilder extends MazeBuilder {
             if (i == 0) {
                 entrance = currentRoom;
                 entrance.visit();
+            } else if (i == 1) {
+                currentRoom.getInventory().addItem(new Item("key", true, "a simple key", "a small key, unadorned and crudely made."));
+            } else {
+                setExitLocked(currentRoom, "key");
             }
         }
     }
