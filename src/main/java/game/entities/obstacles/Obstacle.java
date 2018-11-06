@@ -33,7 +33,11 @@ public class Obstacle {
     }
 
     public boolean checkItem(Item item) {
-        if (active && item != null && item.getId().equals(keyId)) {
+        return active && item != null && item.getId().equals(keyId);
+    }
+
+    public boolean deactivate() {
+        if (active) {
             active = false;
             return true;
         }

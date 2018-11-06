@@ -3,7 +3,6 @@ package game;
 import game.entities.Room;
 import game.entities.creatures.Character;
 import game.entities.items.Item;
-import game.entities.obstacles.Obstacle;
 import game.world.Direction;
 import game.world.generation.MazeBuilder;
 import game.world.generation.PrisonBuilder;
@@ -91,10 +90,10 @@ public class Player {
             return "Which door would you like to unlock?";
         }
 
-        Direction d = directions.get(0);
-        Obstacle obstacle = character.getLocation().getObstacle(d);
-        if (obstacle != null && obstacle.checkItem(item)) {
-            return obstacle.getUnblockedMessage();
+        Direction direction = directions.get(0);
+        Room currentRoom = character.getLocation();
+        if (currentRoom.unlockDoor(direction, item)) {
+            return currentRoom.getObstacle(direction).getUnblockedMessage();
         }
         return "That door is not locked.";
     }

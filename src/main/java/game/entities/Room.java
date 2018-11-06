@@ -1,6 +1,7 @@
 package game.entities;
 
 import game.entities.items.Inventory;
+import game.entities.items.Item;
 import game.entities.obstacles.Obstacle;
 import game.entities.templates.Encounter;
 import game.entities.templates.RoomType;
@@ -53,6 +54,23 @@ public class Room {
                 .filter(e -> e.getDirection().equals(dir))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public boolean unlockDoor(Direction dir, Item item) {
+        if (getExit(dir) == null) {
+            return false;
+        }
+        Obstacle obstacleHere = getObstacle(dir);
+        Obstacle obstacleNeighbour = getExit(dir).getObstacle(dir.getOpposite());
+
+        if (obstacleHere == null || obstacleNeighbour == null) {
+            return false;
+        }
+
+        if (obstacleHere.checkItem(item) && obstacleNeighbour.checkItem(item)) {
+            return obstacleHere.deactivate() && obstacleNeighbour.deactivate();
+        }
+        return false;
     }
 
     public int numberOfExits() {

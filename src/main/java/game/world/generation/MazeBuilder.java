@@ -40,6 +40,7 @@ public abstract class MazeBuilder {
         Room neighbour = currentRoom.getExit(direction);
         if (neighbour != null) {
             neighbour.addObstacle(new Obstacle(direction.getOpposite(), keyId, true));
+            currentRoom.addObstacle(new Obstacle(direction, keyId, true));
         }
     }
 }
