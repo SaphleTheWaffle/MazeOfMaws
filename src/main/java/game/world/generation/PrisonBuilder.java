@@ -12,6 +12,7 @@ public class PrisonBuilder extends MazeBuilder {
     @Override
     public void build() {
         map = new RoomMap();
+        entrance = null;
         int startX = random.nextInt(3) + 1;
         int startY = random.nextInt(3) + 1;
 

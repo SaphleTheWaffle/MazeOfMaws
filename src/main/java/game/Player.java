@@ -5,7 +5,6 @@ import game.entities.creatures.Character;
 import game.entities.items.Item;
 import game.entities.templates.Encounter;
 import game.world.Direction;
-import game.world.generation.GenericMazeBuilder;
 import game.world.generation.MazeBuilder;
 import game.world.generation.PrisonBuilder;
 import game.world.generation.RoomMap;
@@ -26,7 +25,6 @@ public class Player {
         this.id = user.getId();
         this.name = user.getName();
         this.state = GameState.NOT_STARTED;
-        this.maze = new PrisonBuilder();
     }
 
     public GameState getState() {
@@ -36,6 +34,7 @@ public class Player {
     public boolean startGame() {
         if (state == GameState.NOT_STARTED) {
             state = GameState.STARTED;
+            maze = new PrisonBuilder();
             maze.build();
             character = new Character("Test character", 100, 1);
             character.move(maze.getEntrance());
@@ -47,7 +46,6 @@ public class Player {
     public boolean endGame() {
         if (state != GameState.NOT_STARTED) {
             state = GameState.NOT_STARTED;
-            maze = new GenericMazeBuilder();
             return true;
         }
         return false;
