@@ -12,4 +12,9 @@ public class Welcome implements Command {
     public String runNPCs(Player player) {
         return null;
     }
+
+    @Override
+    public boolean actionPerformed() {
+        return false;
+    }
 }

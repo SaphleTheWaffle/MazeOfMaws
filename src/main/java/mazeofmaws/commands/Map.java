@@ -19,6 +19,11 @@ public class Map implements Command {
         return null;
     }
 
+    @Override
+    public boolean actionPerformed() {
+        return false;
+    }
+
     private Room[][] buildGrid(ArrayList<RoomAndCoordinates> list) {
         int maxX = 0, maxY = 0;
         int minX = Integer.MAX_VALUE, minY = Integer.MAX_VALUE;

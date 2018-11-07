@@ -4,6 +4,7 @@ import game.GameState;
 import game.Player;
 import mazeofmaws.commands.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import utils.StringUtils;
 
 import java.util.HashMap;
 
@@ -46,7 +47,13 @@ class CommandExecutor {
         StringBuilder sb = new StringBuilder();
         if (cmd != null) {
             sb.append(cmd.run(player, args));
-            sb.append(cmd.runNPCs(player));
+            if (cmd.actionPerformed()) {
+                String npcTurn = cmd.runNPCs(player);
+                if (npcTurn != null && !npcTurn.equals("")) {
+                    sb.append(StringUtils.SEPARATOR);
+                    sb.append(npcTurn);
+                }
+            }
         }
         return sb.toString();
     }

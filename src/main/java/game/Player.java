@@ -68,7 +68,7 @@ public class Player {
     public String useItem(String itemName, String target) {
         Item item = character.getInventory().getItemByName(itemName);
         if (item == null) {
-            return "Could not find an item matching that name.";
+            return "Could not find an item matching that name!";
         }
         if (item.getId().contains("key")) {
             return useKey(target, item);
@@ -76,7 +76,7 @@ public class Player {
         if (item.use()) {
             return "You used " + item.getName() + ".";
         }
-        return "You can't use that!";
+        return "You cannot use that!";
     }
 
     private String useKey(String target, Item item) {

@@ -16,6 +16,11 @@ public class Look implements Command {
         return null;
     }
 
+    @Override
+    public boolean actionPerformed() {
+        return false;
+    }
+
     private String describeRoom(Player player) {
         return "You are in " + player.describeRoom();
     }

@@ -15,4 +15,9 @@ public class EndGame implements Command {
     public String runNPCs(Player player) {
         return null;
     }
+
+    @Override
+    public boolean actionPerformed() {
+        return false;
+    }
 }
