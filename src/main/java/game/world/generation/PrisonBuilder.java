@@ -14,6 +14,18 @@ public class PrisonBuilder extends MazeBuilder {
     public void build() {
         map = new RoomMap();
         entrance = null;
+
+        createHallways();
+        connectHallways();
+
+        setDeadEndRoomTypes();
+        setHallwayRoomTypes();
+
+        createCells();
+        setCellRoomTypes();
+    }
+
+    private void createHallways() {
         int startX = random.nextInt(3) + 1;
         int startY = random.nextInt(3) + 1;
 
@@ -21,23 +33,18 @@ public class PrisonBuilder extends MazeBuilder {
             map.setRoomAt(new Room(), startX, i, true);
             map.setRoomAt(new Room(), i, startY, true);
         }
-
-        for (RoomAndCoordinates rac : map.getRooms()) {
-            connectHallways(rac);
-        }
-
-        setDeadEndRoomTypes();
-        setRegularRoomTypes();
     }
 
-    private void connectHallways(RoomAndCoordinates rac) {
-        Room r = rac.getRoom();
-        Coordinates c = rac.getCoords();
+    private void connectHallways() {
+        for (RoomAndCoordinates rac : map.getRooms()) {
+            Room r = rac.getRoom();
+            Coordinates c = rac.getCoords();
 
-        for (Direction d : Direction.values()) {
-            RoomAndCoordinates neighbour = map.getRoomAt(c.getNeighbour(d));
-            if (neighbour != null) {
-                r.setExit(neighbour.getRoom(), d);
+            for (Direction d : Direction.values()) {
+                RoomAndCoordinates neighbour = map.getRoomAt(c.getNeighbour(d));
+                if (neighbour != null) {
+                    r.setExit(neighbour.getRoom(), d);
+                }
             }
         }
     }
@@ -48,7 +55,7 @@ public class PrisonBuilder extends MazeBuilder {
         List<RoomType> deadEndTypes = new ArrayList<>();
         deadEndTypes.add(templates.getByCategory("entrance"));
         deadEndTypes.add(templates.getByCategory("warden"));
-        deadEndTypes.addAll(templates.getNumberByCategory("cell", 2));
+        deadEndTypes.addAll(templates.getNumberByCategory("corridor", 2));
         for (int i = 0; i < deadEnds.size() && i < deadEndTypes.size(); i++) {
             Room currentRoom = deadEnds.get(i).getRoom();
             currentRoom.setType(deadEndTypes.get(i));
@@ -57,17 +64,46 @@ public class PrisonBuilder extends MazeBuilder {
                 entrance.visit();
             } else if (i == 1) {
                 currentRoom.getInventory().addItem(new Item("key", true, "a simple key", "a small key, unadorned and crudely made."));
-            } else {
-                setExitLocked(currentRoom, "key");
             }
         }
     }
 
-    private void setRegularRoomTypes() {
+    private void setHallwayRoomTypes() {
         for (RoomAndCoordinates rac : map.getRooms()) {
             Room r = rac.getRoom();
             if (!r.hasType()) {
                 r.setType(templates.getByCategory("corridor"));
+            }
+        }
+    }
+
+    private void createCells() {
+        for (RoomAndCoordinates rac : map.getRooms()) {
+            Room thisRoom = rac.getRoom();
+            Coordinates coords = rac.getCoords();
+
+            if (thisRoom.getTypeCategories().contains("corridor")) {
+                for (int i = 0; i < Direction.values().length; i++) {
+                    Direction dir = Direction.valueOf(i);
+                    if (thisRoom.getExit(dir) == null) {
+                        Coordinates neighbour = coords.getNeighbour(dir);
+                        Room newRoom = new Room();
+                        map.setRoomAt(newRoom, neighbour, false);
+                        connectRooms(thisRoom, dir, newRoom);
+                    }
+                }
+            }
+        }
+    }
+
+    private void setCellRoomTypes() {
+        for (RoomAndCoordinates rac : map.getRooms()) {
+            Room r = rac.getRoom();
+            if (!r.hasType()) {
+                r.setType(templates.getByCategory("cell"));
+                if (random.nextBoolean()) {
+                    setExitLocked(r, "key");
+                }
             }
         }
     }

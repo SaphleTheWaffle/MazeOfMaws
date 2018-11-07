@@ -43,4 +43,9 @@ public abstract class MazeBuilder {
             currentRoom.addObstacle(new Obstacle(direction, keyId, true));
         }
     }
+
+    void connectRooms(Room thisRoom, Direction dir, Room neighbour) {
+        thisRoom.setExit(neighbour, dir);
+        neighbour.setExit(thisRoom, dir.getOpposite());
+    }
 }
