@@ -86,8 +86,8 @@ public class PrisonBuilder extends MazeBuilder {
             if (thisRoom.getTypeCategories().contains("corridor")) {
                 for (int i = 0; i < Direction.values().length; i++) {
                     Direction dir = Direction.valueOf(i);
-                    if (thisRoom.getExit(dir) == null) {
-                        Coordinates neighbour = coords.getNeighbour(dir);
+                    Coordinates neighbour = coords.getNeighbour(dir);
+                    if (thisRoom.getExit(dir) == null && map.getRoomAt(neighbour) == null) {
                         Room newRoom = new Room();
                         map.setRoomAt(newRoom, neighbour, false);
                         connectRooms(thisRoom, dir, newRoom);
