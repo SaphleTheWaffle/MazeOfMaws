@@ -1,6 +1,7 @@
 package game.world.generation;
 
 import game.entities.Room;
+import game.entities.creatures.Creature;
 import game.entities.items.Item;
 import game.entities.templates.RoomType;
 import game.world.Direction;
@@ -104,6 +105,7 @@ public class PrisonBuilder extends MazeBuilder {
                 r.setType(templates.getByCategory("cell"));
                 if (random.nextBoolean()) {
                     setExitLocked(r, "key");
+                    r.addCreature(new Creature("Kobold", "A short, scaly creature vaguely resembling a dragon, if dragons were small, pitiful humanoids.", 10, 1));
                 }
             }
         }

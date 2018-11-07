@@ -10,4 +10,9 @@ public class EndGame implements Command {
         }
         return "You do not currently have a game running.";
     }
+
+    @Override
+    public String runNPCs(Player player) {
+        return null;
+    }
 }

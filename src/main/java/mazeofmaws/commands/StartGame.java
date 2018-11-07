@@ -10,4 +10,9 @@ public class StartGame implements Command {
         }
         return "You already have a game running.";
     }
+
+    @Override
+    public String runNPCs(Player player) {
+        return null;
+    }
 }

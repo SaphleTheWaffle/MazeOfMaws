@@ -43,9 +43,11 @@ class CommandExecutor {
         } else {
             cmd = gameMap.get(command);
         }
+        StringBuilder sb = new StringBuilder();
         if (cmd != null) {
-            return cmd.run(player, args);
+            sb.append(cmd.run(player, args));
+            sb.append(cmd.runNPCs(player));
         }
-        return "";
+        return sb.toString();
     }
 }

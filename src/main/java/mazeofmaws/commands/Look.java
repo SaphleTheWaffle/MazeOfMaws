@@ -11,6 +11,11 @@ public class Look implements Command {
         return describeItem(player, args.trim().toLowerCase());
     }
 
+    @Override
+    public String runNPCs(Player player) {
+        return null;
+    }
+
     private String describeRoom(Player player) {
         return "You are in " + player.describeRoom();
     }

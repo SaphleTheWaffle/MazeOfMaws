@@ -10,4 +10,9 @@ public class Use implements Command {
         String target = indexOfSplit > 0 ? args.substring(indexOfSplit + 2) : "";
         return player.useItem(itemName.trim().toLowerCase(), target.trim().toLowerCase());
     }
+
+    @Override
+    public String runNPCs(Player player) {
+        return player.enemyTurn();
+    }
 }

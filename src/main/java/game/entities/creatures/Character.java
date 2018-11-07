@@ -1,15 +1,24 @@
 package game.entities.creatures;
 
+import game.entities.Room;
 import game.entities.items.Inventory;
 import game.entities.items.Item;
 
-public class Character extends Creature {
+public class Character {
 
     private Inventory inventory;
+    private Room location;
 
-    public Character(String name, int maxHealth, int damage) {
-        super(name, maxHealth, damage);
+    public Character() {
         inventory = new Inventory();
+    }
+
+    public Room getLocation() {
+        return location;
+    }
+
+    public void move(Room location) {
+        this.location = location;
     }
 
     public String enterRoom() {
@@ -30,10 +39,7 @@ public class Character extends Creature {
     public boolean pickupItem(String itemName) {
         Inventory roomItems = location.getInventory();
         Item item = roomItems.getItemByName(itemName);
-        if (item != null && item.isPickupable()) {
-            return inventory.addItem(roomItems.removeItem(item));
-        }
-        return false;
+        return item != null && item.isPickupable() && inventory.addItem(roomItems.removeItem(item));
     }
 
     public Inventory getInventory() {

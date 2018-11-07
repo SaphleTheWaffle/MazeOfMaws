@@ -16,4 +16,9 @@ public class SendStatus implements Command {
                 return "This is an error. If you don't mind, please let the developer know.";
         }
     }
+
+    @Override
+    public String runNPCs(Player player) {
+        return null;
+    }
 }

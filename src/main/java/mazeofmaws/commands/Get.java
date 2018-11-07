@@ -10,4 +10,9 @@ public class Get implements Command {
         }
         return "Couldn't pick up \"" + args.toLowerCase() + "\".";
     }
+
+    @Override
+    public String runNPCs(Player player) {
+        return player.enemyTurn();
+    }
 }

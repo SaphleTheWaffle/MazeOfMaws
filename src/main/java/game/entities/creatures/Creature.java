@@ -1,27 +1,32 @@
 package game.entities.creatures;
 
-import game.entities.Room;
+public class Creature {
+    private String name;
+    private String description;
 
-public abstract class Creature {
     private int maxHealth;
     private int currentHealth;
     private int damage;
-    protected Room location;
 
-    private String name;
-    public Creature(String name, int maxHealth, int damage) {
+    public Creature(String name, String description, int maxHealth, int damage) {
         this.name = name;
+        this.description = description;
+
         this.maxHealth = maxHealth;
-        this.currentHealth = this.maxHealth;
+        this.currentHealth = maxHealth;
         this.damage = damage;
     }
 
-    public Room getLocation() {
-        return location;
+    public String getName() {
+        return name;
     }
 
-    public void move(Room location) {
-        this.location = location;
+    public String toString() {
+        return name;
+    }
+
+    public String describe() {
+        return description;
     }
 
     public int getCurrentHealth() {
@@ -41,7 +46,7 @@ public abstract class Creature {
         }
     }
 
-    public String toString() {
-        return name;
+    public String act() {
+        return name + " is loafing about!";
     }
 }

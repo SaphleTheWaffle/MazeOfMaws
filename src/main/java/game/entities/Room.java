@@ -1,5 +1,6 @@
 package game.entities;
 
+import game.entities.creatures.Creature;
 import game.entities.items.Inventory;
 import game.entities.items.Item;
 import game.entities.obstacles.Obstacle;
@@ -19,6 +20,7 @@ public class Room {
     private Encounter encounter;
     private Room[] exits;
     private List<Obstacle> obstacles;
+    private List<Creature> creatures;
     private RoomType type;
     private boolean visited;
     private String id;
@@ -63,14 +65,10 @@ public class Room {
         Obstacle obstacleHere = getObstacle(dir);
         Obstacle obstacleNeighbour = getExit(dir).getObstacle(dir.getOpposite());
 
-        if (obstacleHere == null || obstacleNeighbour == null) {
-            return false;
-        }
+        return obstacleHere != null && obstacleNeighbour != null &&
+                obstacleHere.checkItem(item) && obstacleNeighbour.checkItem(item) &&
+                obstacleHere.deactivate() && obstacleNeighbour.deactivate();
 
-        if (obstacleHere.checkItem(item) && obstacleNeighbour.checkItem(item)) {
-            return obstacleHere.deactivate() && obstacleNeighbour.deactivate();
-        }
-        return false;
     }
 
     public int numberOfExits() {
@@ -128,13 +126,15 @@ public class Room {
         return StringUtils.bold(type.getName()) + StringUtils.SEPARATOR +
                 type.getDescription() + StringUtils.SEPARATOR +
                 ((inventory.size() > 0) ? (formatItemsString() + StringUtils.SEPARATOR) : "") +
-                formatExitsString();
+                formatExitsString() +
+                ((creatures.size() > 0) ? (StringUtils.SEPARATOR + formatNPCsString()) : "");
     }
 
     private String getShortDescription() {
         return StringUtils.bold(type.getName()) + StringUtils.SEPARATOR +
                 ((inventory.size() > 0) ? (formatItemsString() + StringUtils.SEPARATOR) : "") +
-                formatExitsString();
+                formatExitsString() +
+                ((creatures.size() > 0) ? (StringUtils.SEPARATOR + formatNPCsString()) : "");
     }
 
     private String formatItemsString() {
@@ -173,6 +173,20 @@ public class Room {
         return StringUtils.listify(dirs);
     }
 
+    private String formatNPCsString() {
+        return listNPCs() +
+                (creatures.size() > 1 ? " are " : " is ") +
+                "here.";
+    }
+
+    private String listNPCs() {
+        List<String> creatureNames = new ArrayList<>();
+        for (Creature c : creatures) {
+            creatureNames.add(c.getName());
+        }
+        return StringUtils.listify(creatureNames);
+    }
+
     public List<String> getTypeCategories() {
         return type.getCategories();
     }
@@ -183,5 +197,23 @@ public class Room {
 
     public Encounter getEncounter() {
         return encounter;
+    }
+
+    public List<Creature> getCreatures() {
+        return creatures;
+    }
+
+    public void addCreature(Creature creature) {
+        creatures.add(creature);
+    }
+
+    public String creatureActions() {
+        StringBuilder sb = new StringBuilder();
+        for (Creature creature : creatures) {
+            sb.append(StringUtils.SEPARATOR);
+            sb.append(creature.act());
+        }
+
+        return sb.toString();
     }
 }

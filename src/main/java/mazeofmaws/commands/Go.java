@@ -9,4 +9,9 @@ public class Go implements Command {
         Direction direction = Direction.from(args.trim());
         return player.move(direction);
     }
+
+    @Override
+    public String runNPCs(Player player) {
+        return player.enemyTurn();
+    }
 }

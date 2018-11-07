@@ -38,7 +38,7 @@ public class Player {
             state = GameState.STARTED;
             maze = new PrisonBuilder();
             maze.build();
-            character = new Character("Test character", 100, 1);
+            character = new Character();
             character.move(maze.getEntrance());
             return true;
         }
@@ -112,6 +112,10 @@ public class Player {
 
     public boolean pickupItem(String itemName) {
         return character.pickupItem(itemName);
+    }
+
+    public String enemyTurn() {
+        return character.getLocation().creatureActions();
     }
 
     String getId() {
