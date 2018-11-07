@@ -72,7 +72,7 @@ public class PrisonBuilder extends MazeBuilder {
     private void setHallwayRoomTypes() {
         for (RoomAndCoordinates rac : map.getRooms()) {
             Room r = rac.getRoom();
-            if (!r.hasType()) {
+            if (r.isTypeless()) {
                 r.setType(templates.getByCategory("corridor"));
             }
         }
@@ -101,7 +101,7 @@ public class PrisonBuilder extends MazeBuilder {
     private void setCellRoomTypes() {
         for (RoomAndCoordinates rac : map.getRooms()) {
             Room r = rac.getRoom();
-            if (!r.hasType()) {
+            if (r.isTypeless()) {
                 r.setType(templates.getByCategory("cell"));
                 if (random.nextBoolean()) {
                     setExitLocked(r, "key");

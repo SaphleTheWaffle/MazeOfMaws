@@ -114,6 +114,10 @@ public class Player {
         return character.pickupItem(itemName);
     }
 
+    public String describeCreature(String creatureName) {
+        return character.getLocation().describeCreature(creatureName);
+    }
+
     public String enemyTurn() {
         return character.getLocation().creatureActions();
     }

@@ -8,7 +8,7 @@ public class Look implements Command {
         if (args == null || args.equals("")) {
             return describeRoom(player);
         }
-        return describeItem(player, args.trim().toLowerCase());
+        return describeEntity(player, args.trim().toLowerCase());
     }
 
     @Override
@@ -25,8 +25,27 @@ public class Look implements Command {
         return "You are in " + player.describeRoom();
     }
 
+    private String describeEntity(Player player, String args) {
+        String itemDesc = describeItem(player, args);
+        String creatureDesc = describeCreature(player, args);
+
+        if (!itemDesc.equals("") && !creatureDesc.equals("")) {
+            return "There is both an item and a creature matching that name here. Please be more specific.";
+        }
+        if (!itemDesc.equals("")) {
+            return itemDesc;
+        }
+        if (!creatureDesc.equals("")) {
+            return creatureDesc;
+        }
+        return "There are no creatures or items matching that name here!";
+    }
+
     private String describeItem(Player player, String args) {
-        String res = player.describeItem(args);
-        return res.equals("") ? "Item not found!" : res;
+        return player.describeItem(args);
+    }
+
+    private String describeCreature(Player player, String args) {
+        return player.describeCreature(args);
     }
 }

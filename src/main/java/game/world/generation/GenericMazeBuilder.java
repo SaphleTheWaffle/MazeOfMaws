@@ -79,7 +79,7 @@ public class GenericMazeBuilder extends MazeBuilder {
 
     private void setRegularRoomTypes() {
         map.getRooms().stream()
-                .filter(e -> !e.getRoom().hasType())
+                .filter(e -> e.getRoom().isTypeless())
                 .forEach(e -> e.getRoom().setType(templates.getRoomType()));
     }
 

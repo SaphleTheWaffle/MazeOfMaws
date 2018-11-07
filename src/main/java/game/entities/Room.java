@@ -102,8 +102,8 @@ public class Room {
         this.type = type;
     }
 
-    public boolean hasType() {
-        return type != null;
+    public boolean isTypeless() {
+        return type == null;
     }
 
     public void visit() {
@@ -216,5 +216,14 @@ public class Room {
         }
 
         return sb.toString();
+    }
+
+    public String describeCreature(String creatureName) {
+        for (Creature c : creatures) {
+            if (c.getName().toLowerCase().equals(creatureName)) {
+                return c.describe();
+            }
+        }
+        return "";
     }
 }
