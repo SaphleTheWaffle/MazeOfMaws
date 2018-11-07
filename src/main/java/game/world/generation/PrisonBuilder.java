@@ -78,7 +78,8 @@ public class PrisonBuilder extends MazeBuilder {
     }
 
     private void createCells() {
-        for (RoomAndCoordinates rac : map.getRooms()) {
+        List<RoomAndCoordinates> roomList = new ArrayList<>(map.getRooms());
+        for (RoomAndCoordinates rac : roomList) {
             Room thisRoom = rac.getRoom();
             Coordinates coords = rac.getCoords();
 
