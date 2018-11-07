@@ -26,7 +26,7 @@ public class RoomAndCoordinates {
         return coords;
     }
 
-    Coordinates getNeighbour(Direction dir) {
+    public Coordinates getNeighbour(Direction dir) {
         return coords.getNeighbour(dir);
     }
 

@@ -1,10 +1,13 @@
-package game.world.generation;
+package game.world.generation.builders;
 
 import game.entities.Room;
 import game.entities.creatures.Creature;
 import game.entities.items.Item;
 import game.entities.templates.RoomType;
 import game.world.Direction;
+import game.world.generation.Coordinates;
+import game.world.generation.RoomAndCoordinates;
+import game.world.generation.RoomMap;
 
 import java.util.ArrayList;
 import java.util.Collections;

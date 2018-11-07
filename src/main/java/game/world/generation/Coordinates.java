@@ -19,7 +19,7 @@ public class Coordinates {
         return y;
     }
 
-    Coordinates getNeighbour(Direction dir) {
+    public Coordinates getNeighbour(Direction dir) {
         switch (dir) {
             case NORTH:
                 return new Coordinates(x, y-1);

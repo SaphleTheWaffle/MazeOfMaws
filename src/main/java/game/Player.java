@@ -4,9 +4,9 @@ import game.entities.Room;
 import game.entities.creatures.Character;
 import game.entities.items.Item;
 import game.world.Direction;
-import game.world.generation.MazeBuilder;
-import game.world.generation.PrisonBuilder;
 import game.world.generation.RoomMap;
+import game.world.generation.builders.MazeBuilder;
+import game.world.generation.builders.PrisonBuilder;
 import net.dv8tion.jda.core.entities.User;
 
 import java.util.ArrayList;

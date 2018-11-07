@@ -1,9 +1,10 @@
-package game.world.generation;
+package game.world.generation.builders;
 
 import game.entities.Room;
 import game.entities.obstacles.Obstacle;
 import game.entities.templates.Templates;
 import game.world.Direction;
+import game.world.generation.RoomMap;
 
 import java.util.Random;
 
