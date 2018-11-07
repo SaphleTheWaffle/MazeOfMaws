@@ -32,6 +32,7 @@ public class Room {
         id = UUID.randomUUID().toString();
         visited = false;
         obstacles = new ArrayList<>();
+        creatures = new ArrayList<>();
     }
 
     public Room getExit(Direction direction) {
