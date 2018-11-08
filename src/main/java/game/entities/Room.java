@@ -155,6 +155,9 @@ public class Room {
     }
 
     private String formatExitsString() {
+        if (isCorridor()) {
+            return formatCorridorExitStrings();
+        }
         if (getTypeCategories().contains("corridor")) {
             StringBuilder sb = new StringBuilder();
 
