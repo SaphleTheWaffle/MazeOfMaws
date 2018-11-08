@@ -241,7 +241,10 @@ public class Room {
             sb.append(StringUtils.SEPARATOR);
             sb.append(creature.act());
         }
-
+        List<Creature> deadCreatures = creatures.stream().filter(e -> !e.isAlive()).collect(Collectors.toList());
+        for (Creature c : deadCreatures) {
+            creatures.remove(c);
+        }
         return sb.toString();
     }
 

@@ -10,6 +10,7 @@ public class Creature {
     private int maxHealth;
     private int currentHealth;
     private int damage;
+    private boolean alive;
 
     public Creature(String name, String description, int maxHealth, int damage, Room location) {
         this.name = name;
@@ -19,6 +20,7 @@ public class Creature {
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
         this.damage = damage;
+        this.alive = true;
     }
 
     public String getName() {
@@ -52,9 +54,13 @@ public class Creature {
 
     public String act() {
         if (currentHealth <= 0) {
-            location.removeCreature(this);
+            alive = false;
             return name + " lets out a shrill shriek as it collapses to the ground! Moments later, its body fades away like a bad CG effect.";
         }
         return name + " is loafing about!";
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 }
