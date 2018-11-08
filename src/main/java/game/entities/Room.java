@@ -10,6 +10,7 @@ import game.world.Direction;
 import utils.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -154,26 +155,53 @@ public class Room {
     }
 
     private String formatExitsString() {
+        if (getTypeCategories().contains("corridor")) {
+            StringBuilder sb = new StringBuilder();
+
+        }
         if (numberOfExits() == 1) {
             return "There is an exit to the " + listExits();
         }
         return "Exits are to the " + listExits();
     }
 
+    private boolean isCorridor() {
+        return type != null && getTypeCategories() != null && getTypeCategories().contains("corridor");
+    }
+
+    private String formatCorridorExitStrings() {
+        List<String> corridors = new ArrayList<>();
+        List<String> rooms = new ArrayList<>();
+        for (int i = 0; i < exits.length; i++) {
+            if (exits[i] != null && exits[i].isCorridor()) {
+                corridors.add(getExitName(Direction.valueOf(i)));
+            } else if (exits[i] != null && !exits[i].isCorridor()) {
+                rooms.add(getExitName(Direction.valueOf(i)));
+            }
+        }
+
+        String corridorString = "The corridor continues to the " + StringUtils.listify(corridors) + ".";
+        String roomString = "There are rooms to the " + StringUtils.listify(rooms) + ".";
+
+        return String.join("\n", Arrays.asList(corridorString, roomString));
+    }
+
     String listExits() {
         List<String> dirs = new ArrayList<>();
         for (int i = 0; i < exits.length; i++) {
             if (exits[i] != null) {
-                if (isExitLocked(Direction.valueOf(i))) {
-                    dirs.add(StringUtils.italics(Direction.valueOf(i).name) + " (locked)");
-                } else {
-                    dirs.add(StringUtils.italics(Direction.valueOf(i).name));
-                }
+                dirs.add(getExitName(Direction.valueOf(i)));
             }
         }
         return StringUtils.listify(dirs);
     }
 
+    private String getExitName(Direction direction) {
+        if (isExitLocked(direction)) {
+            return StringUtils.italics(direction.name) + " (locked)";
+        }
+        return StringUtils.italics(direction.name);
+    }
     private String formatNPCsString() {
         return listNPCs() +
                 (creatures.size() > 1 ? " are " : " is ") +
