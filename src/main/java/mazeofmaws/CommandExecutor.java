@@ -4,6 +4,7 @@ import game.GameState;
 import game.Player;
 import mazeofmaws.commands.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import utils.StringUtils;
 
 import java.util.HashMap;
 
@@ -55,7 +56,7 @@ class CommandExecutor {
             }
         }
         if (player != null && player.isDead()) {
-            sb.append("You are dead. Not big surprise.");
+            sb.append(StringUtils.SEPARATOR + "You are dead. Not big surprise.");
             player.endGame();
         }
         return sb.toString();
