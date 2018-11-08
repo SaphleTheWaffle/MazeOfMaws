@@ -9,10 +9,7 @@ import game.entities.templates.RoomType;
 import game.world.Direction;
 import utils.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Room {
@@ -185,8 +182,8 @@ public class Room {
 
         String corridorString = "The corridor continues to the " + StringUtils.listify(corridors) + ".";
         String roomString = (rooms.size() > 1 ? "There are rooms to the " : "There is a room to the ") + StringUtils.listify(rooms) + ".";
-
-        return String.join("\n", Arrays.asList(corridorString, roomString));
+        List<String> combined = rooms.size() > 0 ? Arrays.asList(corridorString, roomString) : Collections.singletonList(corridorString);
+        return String.join("\n", combined);
     }
 
     String listExits() {
