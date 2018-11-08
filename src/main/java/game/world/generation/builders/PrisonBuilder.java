@@ -108,7 +108,7 @@ public class PrisonBuilder extends MazeBuilder {
                 r.setType(templates.getByCategory("cell"));
                 if (random.nextBoolean()) {
                     setExitLocked(r, "key");
-                    r.addCreature(new Creature("Kobold", "A short, scaly creature vaguely resembling a dragon, if dragons were small, pitiful humanoids.", 10, 1, r));
+                    r.addCreature(new Creature("Kobold", "A short, scaly creature vaguely resembling a dragon, if dragons were small, pitiful humanoids.", 10, 1));
                 }
             }
         }

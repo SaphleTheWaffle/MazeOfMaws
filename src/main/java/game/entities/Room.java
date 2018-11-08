@@ -1,5 +1,6 @@
 package game.entities;
 
+import game.entities.creatures.Character;
 import game.entities.creatures.Creature;
 import game.entities.items.Inventory;
 import game.entities.items.Item;
@@ -231,15 +232,11 @@ public class Room {
                 .orElse(null);
     }
 
-    public boolean removeCreature(Creature creature) {
-        return creatures.remove(creature);
-    }
-
-    public String creatureActions() {
+    public String creatureActions(Character character) {
         StringBuilder sb = new StringBuilder();
         for (Creature creature : creatures) {
             sb.append(StringUtils.SEPARATOR);
-            sb.append(creature.act());
+            sb.append(creature.act(character));
         }
         List<Creature> deadCreatures = creatures.stream().filter(e -> !e.isAlive()).collect(Collectors.toList());
         for (Creature c : deadCreatures) {

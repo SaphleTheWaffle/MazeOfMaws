@@ -54,6 +54,10 @@ class CommandExecutor {
                 }
             }
         }
+        if (player != null && player.isDead()) {
+            sb.append("You are dead. Not big surprise.");
+            player.endGame();
+        }
         return sb.toString();
     }
 }

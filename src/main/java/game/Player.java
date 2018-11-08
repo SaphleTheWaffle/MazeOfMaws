@@ -123,7 +123,7 @@ public class Player {
     }
 
     public String enemyTurn() {
-        return character.getLocation().creatureActions();
+        return character.getLocation().creatureActions(character);
     }
 
     String getId() {
@@ -132,6 +132,13 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isDead() {
+        if (state != GameState.STARTED) {
+            return false;
+        }
+        return character.getHealth() <= 0;
     }
 
     public RoomMap getMap() {
