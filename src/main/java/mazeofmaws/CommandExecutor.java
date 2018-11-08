@@ -30,6 +30,7 @@ class CommandExecutor {
         gameMap.put("map", new Map());
         gameMap.put("get", new Get());
         gameMap.put("use", new Use());
+        gameMap.put("attack", new Attack());
     }
 
     String sendWelcomeMessage(MessageReceivedEvent event) {

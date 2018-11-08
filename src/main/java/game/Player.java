@@ -118,6 +118,10 @@ public class Player {
         return character.getLocation().describeCreature(creatureName);
     }
 
+    public String attack(String creatureName) {
+        return character.attack(creatureName);
+    }
+
     public String enemyTurn() {
         return character.getLocation().creatureActions();
     }

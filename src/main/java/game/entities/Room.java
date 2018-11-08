@@ -223,20 +223,19 @@ public class Room {
         return type.getCategories();
     }
 
-    public void setEncounter(Encounter encounter) {
-        this.encounter = encounter;
-    }
-
-    public Encounter getEncounter() {
-        return encounter;
-    }
-
-    public List<Creature> getCreatures() {
-        return creatures;
-    }
-
     public void addCreature(Creature creature) {
         creatures.add(creature);
+    }
+
+    public Creature getCreatureByName(String creatureName) {
+        return creatures.stream()
+                .filter(e -> e.getName().contains(creatureName))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public boolean removeCreature(Creature creature) {
+        return creatures.remove(creature);
     }
 
     public String creatureActions() {

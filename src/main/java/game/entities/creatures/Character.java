@@ -4,13 +4,17 @@ import game.entities.Room;
 import game.entities.items.Inventory;
 import game.entities.items.Item;
 
+import java.util.Random;
+
 public class Character {
 
     private Inventory inventory;
     private Room location;
+    private Random random;
 
     public Character() {
         inventory = new Inventory();
+        random = new Random();
     }
 
     public Room getLocation() {
@@ -44,5 +48,17 @@ public class Character {
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public String attack(String enemyName) {
+        Creature enemy = location.getCreatureByName(enemyName);
+        if (enemy == null) {
+            return "There is nothing you can attack here by that name.";
+        }
+        int damage = random.nextInt(3) + 3;
+
+        enemy.changeHealth(0 - damage);
+
+        return "You attack the " + enemy.getName() + ", dealing " + damage + " damage!";
     }
 }
