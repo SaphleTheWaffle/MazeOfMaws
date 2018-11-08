@@ -229,7 +229,7 @@ public class Room {
 
     public Creature getCreatureByName(String creatureName) {
         return creatures.stream()
-                .filter(e -> e.getName().contains(creatureName))
+                .filter(e -> e.getName().toLowerCase().contains(creatureName))
                 .findFirst()
                 .orElse(null);
     }
