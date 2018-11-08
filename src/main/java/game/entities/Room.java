@@ -184,7 +184,7 @@ public class Room {
         }
 
         String corridorString = "The corridor continues to the " + StringUtils.listify(corridors) + ".";
-        String roomString = "There are rooms to the " + StringUtils.listify(rooms) + ".";
+        String roomString = (rooms.size() > 1 ? "There are rooms to the " : "There is a room to the ") + StringUtils.listify(rooms) + ".";
 
         return String.join("\n", Arrays.asList(corridorString, roomString));
     }
